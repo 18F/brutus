@@ -1,0 +1,12 @@
+GMAIL_USERNAME: email
+GMAIL_PASSWORD: pass
+
+ADMIN_NAME: name
+ADMIN_EMAIL: email
+ADMIN_PASSWORD: pass
+
+MYUSA_OAUTH_PROVIDER_KEY: key
+MYUSA_OAUTH_PROVIDER_SECRET: secret
+MYUSA_HOME: https://my.usa.gov
+
+ROLES: [admin, user, agency_admin]

@@ -1,0 +1,8 @@
+li
+	- if user_signed_in?
+	  = link_to 'Sign out', signout_path
+	- else
+	  = link_to 'Sign in', signin_path
+- if current_user_is(:admin)
+	li
+		= link_to 'Admin', admin_root_path
