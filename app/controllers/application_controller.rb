@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
 
     def authenticate_user!
       if !current_user
-        redirect_to root_url, :alert => 'You need to sign in for access to this page.'
+        redirect_to signin_url, :alert => 'You need to sign in for access to this page.'
       end
     end
 
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
           redirect_to root_url, :alert => 'You are not authorized to access this page.'
         end
       else
-        redirect_to root_url, :alert => 'You need to sign in for access to this page.'
+        redirect_to signin_url, :alert => 'You need to sign in for access to this page.'
       end
     end
 
