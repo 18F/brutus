@@ -1,6 +1,8 @@
 BIG BRUTUS
 =========
 Doing heavy lifting in the land of government hiring.
+<img src="http://www.kansassampler.org/siteassets/brutis3.jpg" />
+
 
 This application was generated using [RailsApps Composer](http://railsapps.github.io/rails-composer/) with OmniAuth and the [MyUSA strategy](https://github.com/GSA-OCSIT/omniauth-myusa) for authentication.
 
