@@ -2,13 +2,13 @@ class User < ActiveRecord::Base
 
   rolify
 
+  has_many :reviews
+
   after_create :add_roles
 
   validates_presence_of :name
   validates_uniqueness_of :email
   validates_uniqueness_of :uid
-
-  after_create :add_roles
 
   acts_as_taggable
 
