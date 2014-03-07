@@ -11,7 +11,7 @@ gem 'bootstrap-sass', '>= 3.0.0.0'
 gem 'cancan'
 gem 'figaro'
 gem 'omniauth'
-gem 'omniauth-myusa', :git => 'https://github.com/GSA-OCSIT/omniauth-myusa.git' 
+gem 'omniauth-myusa', :git => 'https://github.com/GSA-OCSIT/omniauth-myusa.git'
 gem 'rolify'
 gem 'simple_form'
 gem 'slim'
@@ -23,7 +23,7 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'active-resource-pagination'
 gem 'activeresource', require: 'active_resource'
 gem 'httparty'
-
+gem 'acts-as-taggable-on'
 
 group :development do
   gem 'better_errors'
@@ -48,7 +48,6 @@ group :test do
   gem 'email_spec'
 end
 group :production do
-  gem 'unicorn'
   gem 'pg'
   gem 'rails_12factor'
 end

@@ -15,20 +15,20 @@ end
 
 
 # fetches list of agencies from usa.gov API 
-# puts 'AGENCIES'
-# agency_url = 'http://www.usa.gov/api/USAGovAPI/contacts.json/contacts?sort=name&query_filter=language::en'
-# puts "fetching agency list from: #{agency_url}"
-# agency_tree = HTTParty.get(URI.encode(agency_url), headers: {'Content-Type' => 'application/json'})
-# agencies = agency_tree['Contact']
-# agencies.each do |agency| 
-# 	if a = Agency.find_or_create_by_name(:name => agency['Name'])
-# 		begin
-# 			domain = URI.parse(agency['Web_Url'].first['Url']).host.gsub('www.','').gsub('www1.','').gsub('www2.','')
-# 			a.email_suffix = domain
-# 		rescue
-# 			puts "-- No email suffix found for: #{a.name}"
-# 		end
-# 		a.save
-# 		puts a.name
-# 	end
-# end
+puts 'AGENCIES'
+agency_url = 'http://www.usa.gov/api/USAGovAPI/contacts.json/contacts?sort=name&query_filter=language::en'
+puts "fetching agency list from: #{agency_url}"
+agency_tree = HTTParty.get(URI.encode(agency_url), headers: {'Content-Type' => 'application/json'})
+agencies = agency_tree['Contact']
+agencies.each do |agency| 
+	if a = Agency.find_or_create_by_name(:name => agency['Name'])
+		begin
+			domain = URI.parse(agency['Web_Url'].first['Url']).host.gsub('www.','').gsub('www1.','').gsub('www2.','')
+			a.email_suffix = domain
+		rescue
+			puts "-- No email suffix found for: #{a.name}"
+		end
+		a.save
+		puts a.name
+	end
+end
