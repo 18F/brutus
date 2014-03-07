@@ -40,26 +40,10 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth['provider']
       user.uid = auth['uid']
-      if auth['info']
-         user.name = auth['info']['name'] || ""
-         user.email = auth['info']['email'] || ""
-      end
-    end
-  end
-  # 
-  def self.create_with_omniauth(auth)
-    create! do |user|
-      user.provider = auth['provider']
-      user.uid = auth['uid']
       user.token = auth['credentials']['token']
       if auth['info']
         user.name = auth['info']['name'] || auth['info']['email']
         user.email = auth['info']['email'] || ""
-      end
-      if auth['extra']
-        user.gender = auth['extra']['raw_info']['gender'] || ""
-        user.zip = auth['extra']['raw_info']['zip'] || ""
-        user.is_parent = auth['extra']['raw_info']['is_parent'] || ""
       end
       if agency = Agency.find_by_email_suffix(user.email.split("@").last)
         user.agency = agency
