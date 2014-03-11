@@ -10,7 +10,7 @@ This application was generated using [RailsApps Composer](http://railsapps.githu
 Inspired by the work of [Presidential Innovation Fellows](http://www.whitehouse.gov/innovationfellows).
 
 ## How To Get Started
-  - Clone repo (`git clone git@github.com:infamousamos/myusa-demo.git`)
+  - Clone repo (`git clone git@github.com:18f/brutus.git`)
   - Install the bundle (`bundle install`)
   - Rename application.yml.example (`cp application.example.yml application.yml`)
   - Register your application with [MyUSA](http://my.usa.gov) (Redirect URI: [host]/auth/myusa/callback)

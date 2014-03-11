@@ -1,6 +1,12 @@
-h1 Home
+h1 Brutus
 
-h3 User accounts
-- @users.each do |user|
-  p
-    | User: #{link_to user.email, user}
+h4 Doing big lifting in the land of government hiring. 
+
+- if !user_signed_in?
+	p
+		= link_to "Log in with MyUSA", signin_path
+- else
+	p
+		| Random statistics
+
+	img src="http://lorempixel.com/800/250/"

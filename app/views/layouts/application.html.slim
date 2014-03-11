@@ -1,8 +1,8 @@
 html
   head
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title= content_for?(:title) ? yield(:title) : 'MyUSA Demo'
-    meta content=(content_for?(:description) ? yield(:description) : "MyUSA Demo") name="description" 
+    title= content_for?(:title) ? yield(:title) : 'Brutus'
+    meta content=(content_for?(:description) ? yield(:description) : "Brutus") name="description" 
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
