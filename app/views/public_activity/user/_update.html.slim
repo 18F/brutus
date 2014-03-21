@@ -1,0 +1,11 @@
+/ - if activity.trackable
+/ 	li
+/ 	  = link_to activity.trackable.name, activity.trackable
+/ 	  | has been updated.
+/ 	  = activity.inspect
+/ - else
+/   which has since been removed
+
+
+li
+	= debug activity

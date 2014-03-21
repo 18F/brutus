@@ -6,7 +6,7 @@ Brutus::Application.routes.draw do
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/failure' => 'sessions#failure'
-
+  get '/sync' => 'home#sync'
   # devise_for :users, ActiveAdmin::Devise.config
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
 end

@@ -102,6 +102,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     daemons (1.1.9)
+    dalli (2.7.0)
     database_cleaner (1.0.1)
     debug_inspector (0.0.2)
     devise (3.2.2)
@@ -214,6 +215,11 @@ GEM
       slop (~> 3.4)
     pry-nav (0.2.3)
       pry (~> 0.9.10)
+    public_activity (1.4.1)
+      actionpack (>= 3.0.0)
+      activerecord (>= 3.0)
+      i18n (>= 0.5.0)
+      railties (>= 3.0.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -345,6 +351,7 @@ DEPENDENCIES
   cancan
   capybara
   coffee-rails (~> 4.0.0)
+  dalli
   database_cleaner (= 1.0.1)
   email_spec
   factory_girl_rails
@@ -361,6 +368,7 @@ DEPENDENCIES
   pg
   pry
   pry-nav
+  public_activity
   quiet_assets
   rails (= 4.0.3)
   rails_12factor

@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
-
+  include PublicActivity::Model
+  
   rolify
 
   has_many :reviews
+  belongs_to :agency
 
   after_create :add_roles
 
@@ -17,22 +19,29 @@ class User < ActiveRecord::Base
   end
 
   def add_roles
-    self.add_role :admin if User.count == 1 # make the first user an admin
-    self.add_role :agency_admin if self.has_gov_email?
+    add_role :admin if User.count == 1 # make the first user an admin
+    add_role :user
   end
 
-  def log_sign_in(ip)
+  def log_sign_in(ip,auth)
     self.sign_in_count = self.sign_in_count+1
-    self.last_sign_in_at = Time.zone.now
-    self.current_sign_in_at = Time.zone.now
-    self.current_sign_in_ip = ip
-    self.last_sign_in_ip = ip
+    self.last_sign_in_at, self.current_sign_in_at = Time.now, Time.now
+    self.current_sign_in_ip, self.last_sign_in_ip = ip, ip
+    self.token = auth['credentials']['token']
+    if auth['info']
+      self.name = auth['info']['name'] if auth['info']['name']
+      self.email = auth['info']['email'] if auth['info']['email']
+    end
+    if self.agency.nil? and agency = Agency.find_by_email_suffix(self.email.split("@").last)
+      self.agency_id = agency.id
+    end
+    self.create_activity(:sign_in)
     self.save
   end
 
   def log_sign_out(ip)
-    self.current_sign_in_ip = nil
-    self.current_sign_in_at = nil
+    self.current_sign_in_ip, self.current_sign_in_at = nil, nil
+    self.create_activity(:sign_out)
     self.save
   end
 

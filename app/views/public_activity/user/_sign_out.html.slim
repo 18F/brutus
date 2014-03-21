@@ -1,0 +1,9 @@
+/ - if activity.trackable
+/ 	li
+/ 	  = link_to activity.trackable.name, activity.trackable
+/ 	  | 
+/ 	  = activity.inspect
+/ - else
+/   which has since been removed
+li
+	= debug activity

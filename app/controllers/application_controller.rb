@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+
+  include PublicActivity::StoreController
+
   helper_method :current_user
   helper_method :user_signed_in?
   helper_method :correct_user?
@@ -15,7 +18,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_admin_user
-      if current_user && [:admin, :agency_admin].any? {|r| current_user.has_role?(r)}
+      if current_user && [:admin].any? {|r| current_user.has_role?(r)}
         current_user
       end
     end
@@ -51,6 +54,9 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def sf_client
+      @sfclient ||= Restforce.new(:host => ENV['SALESFORCE_HOST'])
+    end
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message

@@ -1,12 +1,20 @@
-h1 Brutus
+/ h1 Brutus
 
-h4 Doing big lifting in the land of government hiring. 
+/ pre
+/ 	| *********************************************WARNING*****************************************
 
-- if !user_signed_in?
-	p
-		= link_to "Log in with MyUSA", signin_path
-- else
-	p
-		| Random statistics
+/ This is a U.S. General Services Administration Federal Government computer system that is "FOR OFFICIAL USE ONLY." This system is subject to monitoring. Individuals found performing unauthorized activities are subject to disciplinary action including criminal prosecution. [GSA CIO P 2100.1I, page 39 of 43, Chapter 5, Paragraph 4] or may be subject to a fine and/or imprisonment in accordance with Title 18, USC, Section 1030
 
-	img src="http://lorempixel.com/800/250/"
+/ 		*********************************************************************************************
+
+/ - if !user_signed_in?
+/ 	p
+/ 		= link_to "Log in with MyUSA", signin_path
+/ - else
+/ 	p
+/ 		| Random statistics
+
+/ 	img src="http://lorempixel.com/800/250/"
+
+ul
+	= render_activities(@activities)

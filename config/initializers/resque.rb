@@ -31,4 +31,62 @@
 #   end
 # end
 
-Resque.redis = 'localhost:6379'
+# Resque.redis = 'localhost:6379'
+# Resque.redis = $redis
+
+# Resque.after_fork do
+# 	Resque.redis.client.reconnect
+# end
+
+# Resque.after_fork do |job|
+#   ActiveRecord::Base.establish_connection
+# end
+
+# Resque.configure do |config|
+
+#   # Set the redis connection. Takes any of:
+#   #   String - a redis url string (e.g., 'redis://host:port')
+#   #   String - 'hostname:port[:db][/namespace]'
+#   #   Redis - a redis connection that will be namespaced :resque
+#   #   Redis::Namespace - a namespaced redis connection that will be used as-is
+#   #   Redis::Distributed - a distributed redis connection that will be used as-is
+#   #   Hash - a redis connection hash (e.g. {:host => 'localhost', :port => 6379, :db => 0})
+#   config.redis = 'localhost:6379'
+
+# end
+
+
+
+
+
+
+# require "redis"
+
+# if Rails.env == 'production' or Rails.env == 'qa' or Rails.env == 'staging'
+# 	$redis = Redis::Namespace.new("brutus", :redis => Redis.new(:path => ENV['REDIS_SOCK']))
+# else
+# 	redis_conf = File.read(Rails.root.join("config/redis", "#{Rails.env}.conf"))
+# 	conf_file = Rails.root.join("config/redis", "#{Rails.env}.conf").to_s
+# 	port = /port.(\d+)/.match(redis_conf)[1]
+# 	`redis-server #{conf_file}`
+# 	res = `ps aux | grep redis-server`
+
+# 	unless res.include?("redis-server") && res.include?(Rails.root.join("config/redis", "#{Rails.env}.conf").to_s)
+# 	  raise "Couldn't start redis"
+# 	end
+
+# 	$redis = Redis::Namespace.new("brutus", :redis => Redis.new(:port => port))
+# end
+
+# Resque.redis = $redis
+
+# Dir["#{Rails.root}/app/jobs/*.rb"].each { |file| require file }
+# Resque.after_fork = Proc.new do
+# 	# Resque.redis = $redis
+# 	# ActiveRecord::Base.establish_connection
+#   Resque.redis.client.reconnect
+# end
+
+# Resque.redis = Redis.new
+# Resque.redis = $REDIS
+# Resque.logger = Logger.new("#{Rails.root}/log/resque.log")

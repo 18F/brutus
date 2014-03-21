@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140307210857) do
+ActiveRecord::Schema.define(version: 20140321160352) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -28,9 +28,45 @@ ActiveRecord::Schema.define(version: 20140307210857) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
+  create_table "activities", force: true do |t|
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "key"
+    t.text     "parameters"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
+  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
+  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+
   create_table "agencies", force: true do |t|
     t.string   "name"
     t.string   "email_suffix"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "applications", force: true do |t|
+    t.string   "remote_key"
+    t.string   "remote_source"
+    t.string   "status"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "applications", ["remote_key"], name: "index_applications_on_remote_key"
+  add_index "applications", ["remote_source"], name: "index_applications_on_remote_source"
+  add_index "applications", ["status"], name: "index_applications_on_status"
+
+  create_table "imports", force: true do |t|
+    t.integer  "imports"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,13 +82,17 @@ ActiveRecord::Schema.define(version: 20140307210857) do
   add_index "projects", ["agency_id"], name: "index_projects_on_agency_id"
 
   create_table "reviews", force: true do |t|
-    t.text     "comments"
-    t.boolean  "score"
-    t.string   "type"
     t.integer  "user_id"
+    t.integer  "score"
+    t.text     "remarks"
+    t.boolean  "follow_up"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "application_id"
   end
+
+  add_index "reviews", ["follow_up"], name: "index_reviews_on_follow_up"
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -99,8 +139,8 @@ ActiveRecord::Schema.define(version: 20140307210857) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "agency"
     t.string   "token"
+    t.integer  "agency_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

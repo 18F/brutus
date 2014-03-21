@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email
+  permit_params :email, :agency_id, :roles
 
   index do
     column :email
@@ -12,10 +12,10 @@ ActiveAdmin.register User do
   filter :email
 
   form do |f|
-    f.inputs "Admin Details" do
+    f.inputs "User Details" do
       f.input :name
       f.input :email
-      f.input :agency, as: :select, collection: AGENCIES
+      f.input :agency, as: :select, collection: Agency.all
     end
     f.inputs "Roles" do
       f.input :roles, :as => :check_boxes
@@ -40,9 +40,9 @@ ActiveAdmin.register User do
 
 
   controller do
-    def permitted_params
-      params.permit(:user => [:id, :name, :email, :agency, :roles])
-    end
+    # def permitted_params
+    #   params.permit(:user => [:id, :name, :email, :agency_id, :roles])
+    # end
 
     def scoped_collection
       resource_class.includes(:roles)
