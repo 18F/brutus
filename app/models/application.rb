@@ -14,7 +14,7 @@ class Application < ActiveRecord::Base
 	end
 
 	def details
-		"<input class='fetch-app' data-appid='#{self.id}' type='hidden' />".html_safe
+		"<div class='loading'></div><input class='fetch-app' data-appid='#{self.id}' type='hidden' />".html_safe
 	end
 
 	def self.recent(num=10)

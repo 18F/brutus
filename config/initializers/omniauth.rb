@@ -8,7 +8,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 	  		}
 	  	},
   	  :scope => %w{
-  			notifications
   			profile.email
 				profile.title
 				profile.first_name
@@ -28,7 +27,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 				profile.is_student
 				profile.is_veteran
 				profile.is_retired
-				tasks
 			}.join(' ')
 end
 

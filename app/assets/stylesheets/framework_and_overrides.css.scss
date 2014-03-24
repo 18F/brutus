@@ -44,3 +44,9 @@ section {
 main {
   background: #ffffff;
 }
+
+.loading {
+  background: asset-url('loading.gif') no-repeat center center;
+  width: 100%;
+  min-height: 150px;
+}

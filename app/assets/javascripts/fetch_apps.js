@@ -12,9 +12,11 @@ $(function () {
 					var field = fields[i];
 					$('<div class="field"><span class="label">'+field['label']+'</span><span class="value">'+result.application[field['name']]+'</span><br clear="both" /></div>').insertBefore('.fetch-app');
 				}
+				$('.loading').hide();
 			},
 			error: function (e) {
 				$('<p class="error">An error has occurred fetching the application details.</p>').insertAfter('.fetch-app');
+				$('.loading').hide();
 			}
 		})
 
