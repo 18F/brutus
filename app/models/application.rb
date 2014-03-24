@@ -4,12 +4,17 @@ class Application < ActiveRecord::Base
   
   has_many :reviews
 	validates_uniqueness_of :remote_key, :scope => :remote_source
-
+	acts_as_taggable
+	
 	def flagged?
 		self.reviews.each do |rev|
 			return true if rev.follow_up?
 		end
 		false
+	end
+
+	def details
+		"<input class='fetch-app' data-appid='#{self.id}' type='hidden' />".html_safe
 	end
 
 	def self.recent(num=10)

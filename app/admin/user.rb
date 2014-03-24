@@ -35,6 +35,13 @@ ActiveAdmin.register User do
       row :roles do |user|
         user.roles.map{|r| r.name.capitalize()}.join(', ').html_safe
       end
+      row :tag_list do |user|
+        ul do
+          user.tags.each do |tag|
+            li tag.name
+          end
+        end
+      end
     end
   end
 

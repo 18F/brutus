@@ -10,7 +10,7 @@ class SalesforceSyncJob
     # client.query('select Id, (select Name from Children__r) from Account').Children__r.first.Name
 
     @apps.each do |app|
-      puts Application.find_or_create_by_remote_key(:remote_key => app['Id'], :status => 'new', :remote_source => ENV['SALESFORCE_HOST'])
+      puts Application.find_or_create_by_remote_key(:remote_key => app['Id'], :status => 'new', :remote_source => ENV['SALESFORCE_HOST'], :name => app['Id'])
     end
   end
 end

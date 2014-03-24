@@ -6,7 +6,7 @@ ActiveAdmin.register_page "Dashboard" do
     panel "Flagged Applications" do
       ul do
         Application.flagged(10).each do |app|
-          li app.name
+          li link_to app.name, admin_application_path(app)
         end
       end
     end
@@ -16,7 +16,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Recent Applications" do
           ul do
             Application.recent(10).each do |app|
-              li app.name
+              li link_to app.name, admin_application_path(app)
             end
           end
         end
@@ -25,7 +25,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Recent Reviews" do
           ul do
             Review.recent(10).each do |act|
-              li act.inspect
+              li debug act
             end
           end
         end

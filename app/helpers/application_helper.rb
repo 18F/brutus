@@ -12,4 +12,5 @@ module ApplicationHelper
 
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=48&d=#{default}"
   end
+
 end

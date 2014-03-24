@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   include PublicActivity::Model
-  
   rolify
 
   has_many :reviews

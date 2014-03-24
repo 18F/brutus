@@ -1,0 +1,21 @@
+.field {
+	display: block;
+	padding: 4px 8px;
+	&:nth-child(even) {
+		background: #EBE6E6;
+	}
+	.label {
+		float: left;
+		width: 25%;
+		font-size: 0.9em;
+		padding-left: 0;
+		text-transform: uppercase;
+		color: #5e6469;
+		text-shadow: white 0 1px 0;
+		font-weight: bold;
+	}
+	.value {
+		float: left;
+		width: 75%;
+	}
+}
