@@ -1,5 +1,9 @@
 ActiveAdmin.register Review do
-  actions :index, :show, :new
+  actions :index, :show, :new, :create
+
+  belongs_to :application
+
+  permit_params :score, :remarks
 
   filter :tags
   filter :flagged
@@ -41,5 +45,12 @@ ActiveAdmin.register Review do
 #   end
   # end
 
+  # controller do
+  #   before_filter :new_review, :only => :new
+
+  #   def new_review
+  #     @review = Review.new(:user_id => current_user.id)
+  #   end
+  # end
 
 end

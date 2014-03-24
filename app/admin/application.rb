@@ -33,7 +33,7 @@ ActiveAdmin.register Application do
 
 
   show do |app|
-    h3 link_to "Review Application", "#"
+    h3 link_to "Review Application", new_admin_application_review_path(app)
     # h3 "Application Details"
     attributes_table do
       row :id
@@ -43,7 +43,7 @@ ActiveAdmin.register Application do
     end
 
     # default_actions
-    h3 link_to "Review Application", "#"
+    h3 link_to "Review Application", new_admin_application_review_path(app)
   end
 
   # form do |f|
