@@ -17,8 +17,10 @@ ActiveAdmin.register User do
       f.input :email
       f.input :agency, as: :select, collection: Agency.all
     end
-    f.inputs "Roles" do
-      f.input :roles, :as => :check_boxes
+    if current_admin_user
+      f.inputs "Roles" do
+        f.input :roles, :as => :check_boxes
+      end
     end
     f.actions
   end
@@ -49,23 +51,27 @@ ActiveAdmin.register User do
 
 
   controller do
-    # def permitted_params
-    #   params.permit(:user => [:id, :name, :email, :agency_id, :roles])
-    # end
+    before_filter :check_access, :only => [:show, :edit, :update, :destroy]
 
     def scoped_collection
       resource_class.includes(:roles)
     end
 
     def update
-      user = User.find(params[:id])
+      if current_admin_user
+        user = User.find(params[:id])
 
-      # update roles to match checkboxes
-      role_ids = params[:user][:role_ids]
-      user.roles.clear()
-      user.roles << role_ids.select{|id| !id.empty? }.map{|id| Role.find(id)}
+        # update roles to match checkboxes
+        role_ids = params[:user][:role_ids]
+        user.roles.clear()
+        user.roles << role_ids.select{|id| !id.empty? }.map{|id| Role.find(id)}
+      end
 
       super
+    end
+
+    def check_access
+      correct_user? unless current_admin_user
     end
   end
 end

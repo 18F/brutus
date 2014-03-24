@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
   helper_method :user_signed_in?
   helper_method :correct_user?
   helper_method :current_user_is
+  helper_method :current_admin_user
+
+  def access_denied
+
+  end
 
   private
     def current_user
@@ -19,6 +24,12 @@ class ApplicationController < ActionController::Base
 
     def current_admin_user
       if current_user && [:admin].any? {|r| current_user.has_role?(r)}
+        current_user
+      end
+    end
+
+    def current_sme_user
+      if current_user && [:admin, :SME].any? {|r| current_user.has_role?(r)}
         current_user
       end
     end
@@ -47,6 +58,16 @@ class ApplicationController < ActionController::Base
     def authenticate_admin_user!
       if current_user
         if !current_admin_user
+          redirect_to root_url, :alert => 'You are not authorized to access this page.'
+        end
+      else
+        redirect_to signin_url, :alert => 'You need to sign in for access to this page.'
+      end
+    end
+
+    def authenticate_sme_user!
+      if current_user
+        if !current_sme_user
           redirect_to root_url, :alert => 'You are not authorized to access this page.'
         end
       else

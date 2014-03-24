@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   before_filter :authenticate_user!, :only => [:sync, :app_details]
 
   def index
-    redirect_to admin_root_path if user_signed_in?
+    redirect_to admin_root_path if current_admin_user or current_sme_user
     @activities = PublicActivity::Activity.order(:created_at => :desc).limit(10)
   end
 
