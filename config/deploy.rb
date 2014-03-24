@@ -38,7 +38,9 @@ namespace :deploy do
     end
   end
 
+
   after :finishing, 'deploy:cleanup'
   after :finishing, 'deploy:migrate'
+  after :finishing, 'resque:restart'
 end
 
