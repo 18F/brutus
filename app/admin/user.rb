@@ -43,6 +43,8 @@ ActiveAdmin.register User do
         end
       end
     end
+
+    active_admin_comments
   end
 
 

@@ -3,7 +3,7 @@ ActiveAdmin.register Review do
 
   belongs_to :application
 
-  permit_params :score, :remarks, :follow_up?
+  permit_params :score, :remarks, :follow_up
 
   filter :tags
   filter :flagged

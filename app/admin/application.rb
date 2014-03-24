@@ -44,6 +44,8 @@ ActiveAdmin.register Application do
 
     # default_actions
     h3 link_to "Review Application", new_admin_application_review_path(app)
+
+    active_admin_comments
   end
 
   # form do |f|
