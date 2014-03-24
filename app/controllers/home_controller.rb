@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 
   def index
     redirect_to admin_root_path if user_signed_in?
-    @activities = PublicActivity::Activity.all.limit(10)
+    @activities = PublicActivity::Activity.order(:created_at => :desc).limit(10)
   end
 
   def resource_name
