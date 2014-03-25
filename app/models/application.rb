@@ -22,8 +22,9 @@ class Application < ActiveRecord::Base
 	end
 
 	def self.flagged(num=10)
+		Application.where(:flagged => true)
 		# Review.where(:follow_up => true)
 		# Application.joins(:reviews).where('reviews.follow_up IS ?',true)
-		Application.joins(:reviews).where(:flagged => true)
+		# Application.joins(:reviews).where(:flagged => true)
 	end
 end

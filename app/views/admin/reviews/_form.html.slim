@@ -20,8 +20,11 @@
 						td
 							ul
 								- @application.reviews.each do |rev|
-									li= link_to "Review #{rev.id}", "/admin/reviews/#{rev.id}"
-hr
+									- if rev.id
+										li= link_to "Review #{rev.id}", admin_application_review_path(@application, rev)
+									- if @application.reviews.size == 1
+										div class="blank_slate_container"
+											span class="blank_slate" There are no reviews for this application.
 
 = simple_form_for  [:admin, @application, @review] do |f|
 	= f.input :score, :as => :select, :collection => [1,2,3]

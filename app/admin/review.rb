@@ -56,7 +56,7 @@ ActiveAdmin.register Review do
     # end
 
     def create
-      self.user_id = current_user.id
+      params[:review][:user_id] = current_user.id
       super
     end
   end
