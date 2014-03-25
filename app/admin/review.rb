@@ -28,29 +28,28 @@ ActiveAdmin.register Review do
     end
   end
 
+  form :partial => "form"
+
   # form do |f|
   #   f.inputs "Review" do
+  #     f.input :user_id, :type => "hidden", :value => current_user.id
+  #     f.input :application_id, :as => "hidden", :value => @app.id
+  #     f.input :score
+  #     f.input :remarks
+  #     f.input :follow_up
 
+  #     # h5 :app_details
   #   end
-  # end
-#   form do |f|
-#     f.inputs "User Details" do
-#       f.input :name
-#       f.input :email
-#       f.input :agency, as: :select, :required => true if user.has_role? :agency_admin end
-#       f.inputs "Roles" do
-#         f.input :roles, :as => :check_boxes
-#       end
-#     f.actions
-#   end
+
+  #   f.actions
   # end
 
-  # controller do
-  #   before_filter :new_review, :only => :new
 
-  #   def new_review
-  #     @review = Review.new(:user_id => current_user.id)
-  #   end
-  # end
+  controller do
+    before_filter :query_application, :only => [:new]
 
+    def query_application
+      @app = Application.find(params[:application_id])
+    end
+  end
 end
