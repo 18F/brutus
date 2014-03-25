@@ -12,3 +12,13 @@ html
     main role="main"
       = render 'layouts/messages'
       = yield
+    div.footer
+      div style="float: left; width: 500px; padding: 10px 20px;"
+        ul
+          li= "There are #{@users.size} users in Brutus."
+          li= "We have received #{@applications.size} applications."
+          li= "We have created #{@reviews.size} reviews."
+      = image_tag('gsa_logo.jpg')
+      = image_tag('18f_logo.jpg')
+      = image_tag('salesforce_logo.jpg', :style => 'margin-top: 15px')
+      br clear="both"
