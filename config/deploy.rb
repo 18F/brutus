@@ -17,6 +17,9 @@ set :resque_environment_task, true
 set :linked_files, %w{config/database.yml config/application.yml config/redis/qa.conf config/newrelic.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets}
 
+# EWW THIS IS UGLY
+SSHKit.config.command_map[:resque] = "/usr/local/rvm/bin/rvm 2.1.1 do bundle exec resque"
+
 set :keep_releases, 5
 
 namespace :deploy do
@@ -41,6 +44,37 @@ namespace :deploy do
 
   after :finishing, 'deploy:cleanup'
   after :finishing, 'deploy:migrate'
-  after :finishing, 'resque:restart'
+  after :finishing, 'resque:restart_workers'
 end
 
+namespace :resque do
+
+  desc "Restart resque workers"
+  task :restart_workers do
+    invoke 'resque:stop_workers'
+    invoke 'resque:start_workers'
+  end
+
+  desc "Starts resque workers"
+  task :start_workers do
+    on roles(:resque_worker), in: :parallel do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :resque, 'work -d -p=tmp/pids/resque_worker_1.pid > /dev/null 2>&1 &'
+        end
+      end
+    end
+  end
+
+  desc "Stop Resque Workers"
+  task :stop_workers do
+    on roles(:app) do
+    begin
+      execute "if [ -e #{current_path}/tmp/pids/resque_work_1.pid ]
+        then for f in `ls #{current_path}/tmp/pids/resque_work*.pid`
+        do kill -s QUIT `cat $f` && rm $f; done; fi"
+    rescue
+      # do nothing
+    end
+  end
+end
