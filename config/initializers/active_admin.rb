@@ -186,11 +186,15 @@ ActiveAdmin.setup do |config|
   #
   # If you wanted to add a static menu item to the default menu provided:
   #
-  #   config.namespace :admin do |admin|
-  #     admin.build_menu :default do |menu|
-  #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
-  #     end
-  #   end
+  config.namespace :admin do |admin|
+    admin.build_menu :utility_navigation do |menu|
+      menu.add label: "Sync from Salesforce", url: "#", html_options: { id: :sync }
+      menu.add label: proc { current_user.name },
+               url: proc { edit_admin_user_path(current_user) },
+               id: 'current_user'
+      admin.add_logout_button_to_menu menu
+    end
+  end
 
 
   # == Download Links

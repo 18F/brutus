@@ -1,1 +1,34 @@
-= debug @app
+.panel
+	h3 Application Details
+	.panel_contents
+		.attributes_table.application
+			table cellspacing="0" cellpadding="0"
+				tbody
+					tr.row.row-id
+						th Details
+						td= @application.details.html_safe
+
+
+.panel
+	h3 Existing Reviews
+	.panel_contents
+		.attributes_table.review
+			table cellspacing="0" cellpadding="0"
+				tbody
+					tr.row.row-id
+						th Reviews
+						td
+							ul
+								- @application.reviews.each do |rev|
+									li= link_to "Review #{rev.id}", "/admin/reviews/#{rev.id}"
+hr
+
+= simple_form_for  [:admin, @application, @review] do |f|
+	= f.input :score, :as => :select, :collection => [1,2,3]
+	= f.input :remarks
+	= f.input :follow_up
+
+	/ hidden fields
+	= f.input :application_id, :value => @application.id, :as => :hidden
+
+	= f.button :submit

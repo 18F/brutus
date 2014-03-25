@@ -2,7 +2,7 @@ class Application < ActiveRecord::Base
 	include PublicActivity::Model
   tracked
   
-  has_many :reviews
+  has_many :reviews, :dependent => :destroy
 	validates_uniqueness_of :remote_key, :scope => :remote_source
 	acts_as_taggable
 	

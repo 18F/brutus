@@ -79,6 +79,14 @@ class ApplicationController < ActionController::Base
       @sfclient ||= Restforce.new(:host => ENV['SALESFORCE_HOST'])
     end
 
+    def redirect_to_back(default = root_url)
+      if !request.env["HTTP_REFERER"].blank? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
+        redirect_to :back
+      else
+        redirect_to default
+      end
+    end
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message
   end

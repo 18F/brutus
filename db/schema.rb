@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140323161935) do
+ActiveRecord::Schema.define(version: 20140325192153) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -60,16 +60,19 @@ ActiveRecord::Schema.define(version: 20140323161935) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "flagged"
+    t.text     "vet_status"
   end
 
   add_index "applications", ["remote_key"], name: "index_applications_on_remote_key"
   add_index "applications", ["remote_source"], name: "index_applications_on_remote_source"
   add_index "applications", ["status"], name: "index_applications_on_status"
+  add_index "applications", ["vet_status"], name: "index_applications_on_vet_status"
 
   create_table "imports", force: true do |t|
     t.integer  "imports"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remote_source"
   end
 
   create_table "projects", force: true do |t|

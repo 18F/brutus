@@ -2,35 +2,63 @@ ActiveAdmin.register_page "Dashboard" do
 
   menu :priority => 1, :label => proc{ I18n.t("active_admin.dashboard") }
 
+  # controller do
+  #   before_filter :query_dashboard, :only => :index
+
+  #   def query_dashboard
+  #     @flagged = Application.flagged
+  #     @recent_apps = Application.recent
+  #     @recent_reviews = Review.recent
+  #     binding.pry
+  #   end
+  # end
+
+  flagged = Application.flagged
+  recent_reviews = Review.recent
+  recent_apps = Application.recent
+
   content :title => proc{ I18n.t("active_admin.dashboard") } do
     panel "Flagged Applications" do
-      ul do
-        Application.flagged(10).each do |app|
-          li link_to app.name, admin_application_path(app)
+      if flagged.any?
+        ul do
+          flagged.each do |app|
+            li link_to app.name, admin_application_path(app)
+          end
         end
+      else
+        '<div class="blank_slate_container"><span class="blank_slate">There are no Flagged Applications at this time.</span></div>'.html_safe
       end
     end
 
     columns do
       column do
         panel "Recent Applications" do
-          ul do
-            Application.recent(10).each do |app|
-              li link_to app.name, admin_application_path(app)
+          if recent_apps.any?
+            ul do
+              recent_apps.each do |app|
+                li link_to app.name, admin_application_path(app)
+              end
             end
+          else
+            '<div class="blank_slate_container"><span class="blank_slate">There are no Recent Applications at this time.</span></div>'.html_safe
           end
         end
       end
       column do
         panel "Recent Reviews" do
-          ul do
-            Review.recent(10).each do |act|
-              li debug act
+          if recent_reviews.any?
+            ul do
+              recent_reviews.each do |act|
+                li debug act
+              end
             end
+          else
+            '<div class="blank_slate_container"><span class="blank_slate">There are no Recent Reviews at this time.</span></div>'.html_safe
           end
         end
       end
     end
   end
+
 
 end

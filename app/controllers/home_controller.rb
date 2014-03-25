@@ -4,7 +4,10 @@ class HomeController < ApplicationController
 
   def index
     redirect_to admin_root_path if current_admin_user or current_sme_user
-    @activities = PublicActivity::Activity.order(:created_at => :desc).limit(10)
+    @applications ||= Application.all
+    @reviews ||= Review.all
+    @users ||= User.all
+    # @activities = PublicActivity::Activity.order(:created_at => :desc).limit(10)
   end
 
   def resource_name
@@ -20,8 +23,18 @@ class HomeController < ApplicationController
   end
 
   def sync
-    Resque.enqueue(SalesforceSyncJob)
-    render :json => 'success'
+    last_import = Import.last
+    begin
+      if last_import.nil? or last_import.created_at < 10.minutes.ago
+        render :json => "Success! The Salesforce API will be syncronized momentarily.", :status => 200
+        new_import = Import.create
+        Resque.enqueue(SalesforceSyncJob, new_import.id)
+      else
+        render :json => "You are currently viewing up-to-date data, last synced: #{last_import.created_at}. Refresh your browser to view the latest data.", :status => 400
+      end
+    rescue
+      render :json => "I'm not sure what is going on.", :status => 200
+    end
   end
 
   def app_details

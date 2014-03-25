@@ -1,25 +1,3 @@
-/ h1 Brutus
-
-/ pre
-/ 	| *********************************************WARNING*****************************************
-
-/ This is a U.S. General Services Administration Federal Government computer system that is "FOR OFFICIAL USE ONLY." This system is subject to monitoring. Individuals found performing unauthorized activities are subject to disciplinary action including criminal prosecution. [GSA CIO P 2100.1I, page 39 of 43, Chapter 5, Paragraph 4] or may be subject to a fine and/or imprisonment in accordance with Title 18, USC, Section 1030
-
-/ 		*********************************************************************************************
-
-/ - if !user_signed_in?
-/ 	p
-/ 		= link_to "Log in with MyUSA", signin_path
-/ - else
-/ 	p
-/ 		| Random statistics
-
-/ 	img src="http://lorempixel.com/800/250/"
-
-/ ul
-/ 	= render_activities(@activities)
-
-
 - if user_signed_in?
 	h1 Welcome to Brutus!
 	p You are currently logged in, however, your account does not have access to anything.
@@ -27,3 +5,14 @@
 - else
 	h1 align="center"
 		= link_to "Sign in with MyUSA", signin_path
+
+br
+br
+br
+br
+br
+div style="width: 50%; margin: 2.0em auto; padding: 20px; border: 1px solid #e1e1e1;"
+	ul
+		li= "There are #{@users.size} users in Brutus."
+		li= "We have received #{@applications.size} applications."
+		li= "We have created #{@reviews.size} reviews."

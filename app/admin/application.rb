@@ -1,17 +1,9 @@
 ActiveAdmin.register Application do
   actions :index, :show
 
-  # controller do
-  #   before_filter :fetch_app, :only => [:show]
-
-  #   def fetch_app
-  #     @app = Application.find(params[:id])
-  #     @sf_app = SF_CLIENT.select(ENV['SALESFORCE_APP_OBJECT'], @app.remote_key, Rails.cache.read('SALESFORCE_FIELDS'))
-  #   end
-  # end
-
   filter :tags
   filter :flagged
+  filter :vet_status
 
   index do
     column :id
@@ -20,15 +12,15 @@ ActiveAdmin.register Application do
     column "Reviews" do |app|
       app.reviews.size
     end
-    column :flagged?
+    column :flagged? do |app|
+      if app.flagged?
+        "Yes"
+      else
+        "No"
+      end
+    end
 
     default_actions
-    # column "Actions" do |u|
-    #   link_to "Review", "/review"
-    #   # if can? :read, u
-    #   #    link_to "View", admin_user_path(u)
-    #   # end
-    # end
   end
 
 

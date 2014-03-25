@@ -25,6 +25,9 @@ ActiveAdmin.register Review do
     h3 "Review Details"
     attributes_table do
       row :id
+      row :score
+      row :follow_up
+      row :remarks
     end
   end
 
@@ -46,10 +49,15 @@ ActiveAdmin.register Review do
 
 
   controller do
-    before_filter :query_application, :only => [:new]
+    # before_filter :query_application, :only => [:new]
 
-    def query_application
-      @app = Application.find(params[:application_id])
+    # def query_application
+    #   @app = Application.find(params[:application_id])
+    # end
+
+    def create
+      self.user_id = current_user.id
+      super
     end
   end
 end

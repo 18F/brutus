@@ -19,7 +19,26 @@ $(function () {
 				$('<p class="error">An error has occurred fetching the application details.</p>').insertAfter('.fetch-app');
 				$('.loading').hide();
 			}
-		})
-
+		});
 	}
+
+	$('#sync').click(function (e) {
+		var rand = Math.floor((Math.random()*100)+1);
+		e.preventDefault();
+		$.ajax({
+			url: '/sync?no_cache='+rand,
+			type: 'GET',
+			contentType: 'application/json',
+			success: function (result) {
+				alert(result.responseText);
+				// console.log(document.location);
+				window.location.href = window.document.location+"?sync=success&no_cache="+rand;
+			},
+			error: function (exc) {
+				alert(exc.responseText);
+				// console.log(exc.responseText);
+			}
+		});
+		return false;
+	});
 });
