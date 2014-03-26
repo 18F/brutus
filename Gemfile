@@ -42,6 +42,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rails', '~> 1.1.0'
   gem "capistrano-resque", github: "sshingler/capistrano-resque", require: false
+  gem 'capistrano-maintenance', github: "capistrano/capistrano-maintenance"
 end
 group :development, :test do
   gem 'factory_girl_rails'
