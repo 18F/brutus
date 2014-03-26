@@ -2,23 +2,13 @@ ActiveAdmin.register_page "Dashboard" do
 
   menu :priority => 1, :label => proc{ I18n.t("active_admin.dashboard") }
 
-  # controller do
-  #   before_filter :query_dashboard, :only => :index
-
-  #   def query_dashboard
-  #     @flagged = Application.flagged
-  #     @recent_apps = Application.recent
-  #     @recent_reviews = Review.recent
-  #     binding.pry
-  #   end
-  # end
-
+  # one downside to activeadmin: mixing controller/views
   flagged = Application.flagged
   recent_reviews = Review.recent
   recent_apps = Application.recent
 
   content :title => proc{ I18n.t("active_admin.dashboard") } do
-    panel "Flagged Applications" do
+    panel "Flagged Applications (#{flagged.size} total)" do
       if flagged.any?
         ul do
           flagged.each do |app|
@@ -32,7 +22,7 @@ ActiveAdmin.register_page "Dashboard" do
 
     columns do
       column do
-        panel "Recent Applications" do
+        panel "Recent Applications (#{Application.all.size} total)" do
           if recent_apps.any?
             ul do
               recent_apps.each do |app|
@@ -45,7 +35,7 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
       column do
-        panel "Recent Reviews" do
+        panel "Recent Reviews (#{Review.all.size} total)" do
           if recent_reviews.any?
             ul do
               recent_reviews.each do |act|
