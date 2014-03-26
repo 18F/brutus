@@ -27,6 +27,7 @@ gem 'acts-as-taggable-on'
 gem 'restforce'
 gem 'dalli'
 gem 'public_activity'
+gem 'newrelic_rpm'
 
 group :development do
   gem 'better_errors'
@@ -59,5 +60,4 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'newrelic_rpm'
 end
