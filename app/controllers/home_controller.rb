@@ -39,9 +39,11 @@ class HomeController < ApplicationController
 
   def app_details
     @client ||= SF_CLIENT
-    @sf_fields ||= Rails.cache.read('SALESFORCE_FIELDS_ARRAY')
+    @sf_fields ||= Rails.cache.read('SALESFORCE_APP_OBJECT_FIELDS')
     @app = Application.find(params[:id])
-    @detail = @client.select(ENV['SALESFORCE_APP_OBJECT'], @app.remote_key, @sf_fields)
-    render :json => { :application => @detail, :fields => JSON.parse(Rails.cache.read('SALESFORCE_FIELDS_DETAIL')) }
+    # @detail = @client.select(ENV['SALESFORCE_APP_OBJECT'], @app.remote_key, @sf_fields)
+    @detail = @client.query("select #{Rails.cache.read('SALESFORCE_APP_OBJECT_FIELDS').join(", ")} from PIF_Application__c where PIF_Contact__c = '#{@app.remote_key}'").first
+    # render :json => { :application => @detail, :fields => JSON.parse(Rails.cache.read('SALESFORCE_APP_OBJECT_FIELDS')).to_json }
+    render :json => @detail
   end
 end

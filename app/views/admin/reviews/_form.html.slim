@@ -9,29 +9,30 @@
 						td= @application.details.html_safe
 
 
-.panel
-	h3 Existing Reviews
-	.panel_contents
-		.attributes_table.review
-			table cellspacing="0" cellpadding="0"
-				tbody
-					tr.row.row-id
-						th Reviews
-						td
-							ul
-								- @application.reviews.each do |rev|
-									- if rev.id
-										li= link_to "Review #{rev.id}", admin_application_review_path(@application, rev)
-									- if @application.reviews.size == 1
-										div class="blank_slate_container"
-											span class="blank_slate" There are no reviews for this application.
+sidebar
+	.panel
+		h3 Existing Reviews
+		.panel_contents
+			.attributes_table.review
+				table cellspacing="0" cellpadding="0"
+					tbody
+						tr.row.row-id
+							th Reviews
+							td
+								ul
+									- @application.reviews.each do |rev|
+										- if rev.id
+											li= link_to "Review #{rev.id}", admin_application_review_path(@application, rev)
+										- if @application.reviews.size == 1
+											div class="blank_slate_container"
+												span class="blank_slate" There are no reviews for this application.
 
-= simple_form_for  [:admin, @application, @review] do |f|
-	= f.input :score, :as => :select, :collection => [1,2,3]
-	= f.input :remarks
-	= f.input :follow_up
+	= simple_form_for  [:admin, @application, @review] do |f|
+		= f.input :score, :as => :select, :collection => [1,2,3]
+		= f.input :remarks
+		= f.input :follow_up
 
-	/ hidden fields
-	= f.input :application_id, :value => @application.id, :as => :hidden
+		/ hidden fields
+		= f.input :application_id, :value => @application.id, :as => :hidden
 
-	= f.button :submit
+		= f.button :submit

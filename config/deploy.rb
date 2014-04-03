@@ -1,3 +1,5 @@
+# require 'new_relic/recipes'
+
 set :application, 'brutus'
 set :repo_url, 'git@github.com:18F/brutus.git'
 
@@ -47,6 +49,7 @@ namespace :deploy do
   after :finishing, 'deploy:migrate'
   after :finishing, 'resque:restart_workers'
   after :finished, 'maintenance:disable'
+  # after :finished, 'newrelic:notice_deployment' [TODO]
 end
 
 namespace :resque do

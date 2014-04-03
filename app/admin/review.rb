@@ -8,6 +8,8 @@ ActiveAdmin.register Review do
   filter :tags
   filter :flagged
 
+  config.comments = true
+
   index do
     column :id
     
@@ -33,31 +35,13 @@ ActiveAdmin.register Review do
 
   form :partial => "form"
 
-  # form do |f|
-  #   f.inputs "Review" do
-  #     f.input :user_id, :type => "hidden", :value => current_user.id
-  #     f.input :application_id, :as => "hidden", :value => @app.id
-  #     f.input :score
-  #     f.input :remarks
-  #     f.input :follow_up
-
-  #     # h5 :app_details
-  #   end
-
-  #   f.actions
-  # end
-
 
   controller do
-    # before_filter :query_application, :only => [:new]
+    after_filter :assign_user
 
-    # def query_application
-    #   @app = Application.find(params[:application_id])
-    # end
-
-    def create
-      params[:review][:user_id] = current_user.id
-      super
+    def assign_user
+      @review.user_id = current_user.id
+      @review.save
     end
   end
 end

@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/capistrano/capistrano-maintenance.git
-  revision: 1b46e54de753b6d568ffac00a670dceb83b61bad
-  specs:
-    capistrano-maintenance (0.0.1)
-      capistrano (>= 3.0)
-
-GIT
   remote: git://github.com/gregbell/active_admin.git
   revision: 388ed07e477af5f5644d0c30cd45b4377c886dd7
   specs:
@@ -397,7 +390,6 @@ DEPENDENCIES
   cancan
   capistrano (~> 3.0.1)
   capistrano-bundler
-  capistrano-maintenance!
   capistrano-rails (~> 1.1.0)
   capistrano-resque!
   capistrano-rvm (~> 0.1.0)

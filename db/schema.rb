@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325192153) do
+ActiveRecord::Schema.define(version: 20140326185028) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20140325192153) do
     t.datetime "updated_at"
     t.boolean  "flagged"
     t.text     "vet_status"
+    t.boolean  "junk",          default: false
   end
 
   add_index "applications", ["remote_key"], name: "index_applications_on_remote_key"

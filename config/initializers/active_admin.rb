@@ -188,7 +188,7 @@ ActiveAdmin.setup do |config|
   #
   config.namespace :admin do |admin|
     admin.build_menu :utility_navigation do |menu|
-      menu.add label: "Sync from Salesforce", url: "#", html_options: { id: :sync }
+      # menu.add label: "Sync from Salesforce", url: "#", html_options: { id: :sync }
       menu.add label: proc { current_user.name },
                url: proc { admin_user_path(current_user) },
                id: 'current_user'

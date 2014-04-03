@@ -1,17 +1,16 @@
 class SalesforceSyncJob
   @queue = :default
 
-  def self.perform(import_id)
-    @client = Restforce.new(:host => ENV['SALESFORCE_HOST'])
-    @apps = @client.query("select Id from #{ENV['SALESFORCE_APP_OBJECT']}")
-    @fields_arr = Rails.cache.read('SALESFORCE_FIELDS_ARRAY')
+  def self.perform(import_id=nil)
+    import_id ||= Import.last.id
+    @client = SF_CLIENT || Restforce.new(:host => ENV['SALESFORCE_HOST'])
+    @contacts = @client.query("select Id from #{ENV['SALESFORCE_CONTACT_OBJECT']}")
 
     new_apps = []
-    @apps.each do |sf_app|
-      unless app = Application.where(:remote_key => sf_app['Id']).first
-        new_app = Application.create(:remote_key => sf_app['Id'], :status => 'new', :remote_source => ENV['SALESFORCE_HOST'], :name => sf_app['Id'])
-        sf_fields = Rails.cache.read('SALESFORCE_FIELDS_ARRAY')
-        detail = @client.select(ENV['SALESFORCE_APP_OBJECT'], new_app.remote_key, sf_fields)
+    @contacts.each do |contact|
+      unless app = Application.where(:remote_key => contact['Id']).first
+        new_app = Application.create(:remote_key => contact['Id'], :status => 'new', :remote_source => ENV['SALESFORCE_HOST'], :name => contact['Id'])
+        detail = @client.query("select #{Rails.cache.read('SALESFORCE_APP_OBJECT_FIELDS').join(", ")} from PIF_Application__c where PIF_Contact__c = '#{contact['Id']}'").first
         begin
           new_app.vet_status = detail['Veteran_Status__c']
           new_app.tag_list = detail['Skills__c'].split(';').join(', ')
