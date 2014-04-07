@@ -12,7 +12,10 @@ Inspired by the work of [Presidential Innovation Fellows](http://www.whitehouse.
 ## How To Get Started
   - Clone repo (`git clone git@github.com:18f/brutus.git`)
   - Install the bundle (`bundle install`)
-  - Rename application.yml.example (`cp application.example.yml application.yml`)
+  - Create local config files: `cd config`
+    - `cp application.example.yml application.yml` 
+    - `cp database.example.yml database.yml`
+    - `cp newrelic.yml.example newrelic.yml`
   - Register your application 
     - with [MyUSA](http://my.usa.gov) (Redirect URI: [host]/auth/myusa/callback)
     - OR for loal dev register with QA server [MyUSA](http://qa.my.usa.gov) (Redirect URI: http://localhost:3000/auth/myusa/callback)
