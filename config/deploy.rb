@@ -44,11 +44,11 @@ namespace :deploy do
   end
 
 
-  before :starting, 'maintenance:enable'
+  # before :starting, 'maintenance:enable'
   after :finishing, 'deploy:cleanup'
   after :finishing, 'deploy:migrate'
   after :finishing, 'resque:restart_workers'
-  after :finished, 'maintenance:disable'
+  # after :finished, 'maintenance:disable'
   # after :finished, 'newrelic:notice_deployment' [TODO]
 end
 
