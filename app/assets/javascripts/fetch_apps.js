@@ -18,11 +18,8 @@ $(function () {
 					_$details.append('<div class="field"><span class="label">'+field+'</span><span class="value">'+result.application[field]+'</span><br clear="both" /></div>')
 				}
 				$('.loading').hide();
-				// $('.fetch-app').insertBefore(_$details);
-				// $('body').append(_$details)
 				$(_$details).insertBefore('.fetch-app');
-				// $('.fetch0app')
-				$('#details-'+app_id).linkify();
+				$(_$details).linkify();
 			},
 			error: function (e) {
 				$('<p class="error">An error has occurred fetching the application details.</p>').insertAfter('.fetch-app');
