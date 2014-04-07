@@ -13,7 +13,14 @@ Inspired by the work of [Presidential Innovation Fellows](http://www.whitehouse.
   - Clone repo (`git clone git@github.com:18f/brutus.git`)
   - Install the bundle (`bundle install`)
   - Rename application.yml.example (`cp application.example.yml application.yml`)
-  - Register your application with [MyUSA](http://my.usa.gov) (Redirect URI: [host]/auth/myusa/callback)
+  - Register your application 
+    - with [MyUSA](http://my.usa.gov) (Redirect URI: [host]/auth/myusa/callback)
+    - OR for loal dev register with QA server [MyUSA](http://qa.my.usa.gov) (Redirect URI: http://localhost:3000/auth/myusa/callback)
+  - edit application.yaml
+    - MYUSA_OAUTH_PROVIDER_KEY should be your Auth Client ID from MyUSA
+    - MYUSA_OAUTH_PROVIDER_SECRET should be your Auth Client Secret from MyUSA
+  - Install redis and memcache.  Redis will attempt to run automatically at startup.
+  - rake db:setup
   - Fire up rails! (`rails s`)
 
 
