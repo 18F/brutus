@@ -8,12 +8,21 @@ $(function () {
 			contentType: 'application/json',
 			success: function (result) {
 				$('.fetch-app').data('details',result);
-				fields = result.fields;
+				var _$details = $('<div id="details-'+app_id+'"></div>')
+				console.log(result);
+				var fields = result.fields;
 				for (var i=0;i<fields.length;i++) {
 					var field = fields[i];
-					$('<div class="field"><span class="label">'+field['label']+'</span><span class="value">'+result.application[field['name']]+'</span><br clear="both" /></div>').insertBefore('.fetch-app');
+					if (field)
+						// $('<div class="field"><span class="label">'+field+'</span><span class="value">'+result.application[field]+'</span><br clear="both" /></div>').insertBefore('.fetch-app');
+					_$details.append('<div class="field"><span class="label">'+field+'</span><span class="value">'+result.application[field]+'</span><br clear="both" /></div>')
 				}
 				$('.loading').hide();
+				// $('.fetch-app').insertBefore(_$details);
+				// $('body').append(_$details)
+				$(_$details).insertBefore('.fetch-app');
+				// $('.fetch0app')
+				$('#details-'+app_id).linkify();
 			},
 			error: function (e) {
 				$('<p class="error">An error has occurred fetching the application details.</p>').insertAfter('.fetch-app');

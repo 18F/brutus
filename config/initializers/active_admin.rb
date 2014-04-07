@@ -118,7 +118,7 @@ ActiveAdmin.setup do |config|
   # This allows your users to comment on any resource registered with Active Admin.
   #
   # You can completely disable comments:
-  config.allow_comments = true
+  config.allow_comments = false
   #
   # You can disable the menu item for the comments index page:
   # config.show_comments_in_menu = false
@@ -160,6 +160,7 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   config.register_javascript 'fetch_apps.js'
+  config.register_javascript 'jquery.linkify.min.js'
 
 
   # == CSV options
