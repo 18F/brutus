@@ -19,6 +19,7 @@ Inspired by the work of [Presidential Innovation Fellows](http://www.whitehouse.
   - edit application.yaml
     - MYUSA_OAUTH_PROVIDER_KEY should be your Auth Client ID from MyUSA
     - MYUSA_OAUTH_PROVIDER_SECRET should be your Auth Client Secret from MyUSA
+    - if you are using MyUSA QA, then set MYUSA_HOME: https://qa.my.usa.gov  
   - Install redis and memcache.  Redis will attempt to run automatically at startup.
   - rake db:setup
   - Fire up rails! (`rails s`)
