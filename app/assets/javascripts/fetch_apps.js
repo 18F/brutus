@@ -55,4 +55,12 @@ $(function () {
 		});
 		return false;
 	});
+
+	$('.cpc').change(function (e) {
+		_score = 0;
+		$('.cpc').each(function () {
+			_score = _score + parseInt($(this).val());
+		});
+		$('.score').val(_score);
+	});
 });

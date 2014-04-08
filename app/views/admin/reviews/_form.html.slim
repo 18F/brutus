@@ -22,9 +22,19 @@
 				- cpc.crediting_plan_assertions.each do |cpa|
 					input type="hidden" value="#{cpa.description}" id="cpa-desc-#{cpa.id}"
 
-			hr 
+			li
+				hr 
 			li.string.input
 				= f.input :follow_up
+
+			li
+				hr
+
+			li.string
+				label Total score
+				input type="text" class="score" name="review[score]" readonly="readonly"
+
+			
 
 			li.buttons
 				= f.button :submit
