@@ -75,8 +75,8 @@ namespace :resque do
   task :stop_workers do
     on roles(:app) do
       begin
-        execute "if [ -e #{current_path}/tmp/pids/resque_work_1.pid ]
-          then for f in `ls #{current_path}/tmp/pids/resque_work*.pid`
+        execute "if [ -e #{current_path}/tmp/pids/resque_worker_1.pid ]
+          then for f in `ls #{current_path}/tmp/pids/resque_worker*.pid`
           do kill -s QUIT `cat $f` && rm $f; done; fi"
       rescue
         # do nothing
