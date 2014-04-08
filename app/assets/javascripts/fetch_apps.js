@@ -42,15 +42,15 @@ $(function () {
 		$.ajax({
 			url: '/admin/sync?no_cache='+rand,
 			type: 'GET',
-			contentType: 'application/json',
+			// contentType: 'application/json',
 			success: function (result) {
 				alert(result.responseText);
 				// console.log(document.location);
 				window.location.href = window.document.location+"?sync=success&no_cache="+rand;
 			},
 			error: function (exc) {
-				// alert(exc.responseText);
-				console.log(exc.responseText);
+				alert(exc.responseText);
+				// console.log(exc.responseText);
 			}
 		});
 		return false;

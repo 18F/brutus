@@ -19,6 +19,12 @@ class Application < ActiveRecord::Base
 		"<div class='loading'></div><input class='fetch-app' data-appid='#{self.id}' type='hidden' />".html_safe
 	end
 
+	def self.tagged_like_user(user_id)
+		
+		# User.tagged_with(["awesome", "cool"], :any => true)
+		# Application.where(:)
+	end
+
 	def self.recent(num=10)
 		Application.where(:junk => false).limit(num).order(:created_at => :desc)
 	end

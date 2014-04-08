@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408051751) do
+ActiveRecord::Schema.define(version: 20140408085022) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -68,6 +68,33 @@ ActiveRecord::Schema.define(version: 20140408051751) do
   add_index "applications", ["remote_source"], name: "index_applications_on_remote_source"
   add_index "applications", ["status"], name: "index_applications_on_status"
   add_index "applications", ["vet_status"], name: "index_applications_on_vet_status"
+
+  create_table "crediting_plan_assertions", force: true do |t|
+    t.integer  "score"
+    t.text     "description"
+    t.integer  "crediting_plan_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "crediting_plan_assertions", ["crediting_plan_category_id"], name: "index_crediting_plan_assertions_on_crediting_plan_category_id"
+
+  create_table "crediting_plan_categories", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "crediting_plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "crediting_plan_categories", ["crediting_plan_id"], name: "index_crediting_plan_categories_on_crediting_plan_id"
+
+  create_table "crediting_plans", force: true do |t|
+    t.string   "name"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "imports", force: true do |t|
     t.integer  "imports"

@@ -34,16 +34,19 @@ ActiveAdmin.register_page "Dashboard" do
           end
         end
       end
-      column do
-        panel "Recent Reviews (#{Review.all.size} total)" do
-          if recent_reviews.any?
-            ul do
-              recent_reviews.each do |act|
-                li debug act
+
+      if current_admin_user
+        column do
+          panel "Recent Reviews (#{Review.all.size} total)" do
+            if recent_reviews.any?
+              ul do
+                recent_reviews.each do |rev|
+                  li link_to rev.user.name, admin_application_review_path(rev.application, rev)
+                end
               end
+            else
+              '<div class="blank_slate_container"><span class="blank_slate">There are no Recent Reviews at this time.</span></div>'.html_safe
             end
-          else
-            '<div class="blank_slate_container"><span class="blank_slate">There are no Recent Reviews at this time.</span></div>'.html_safe
           end
         end
       end

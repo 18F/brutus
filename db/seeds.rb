@@ -32,3 +32,5 @@ agencies.each do |agency|
 		puts a.name
 	end
 end
+
+puts 'CREDITING PLAN'

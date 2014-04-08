@@ -7,6 +7,7 @@ ActiveAdmin.register Review do
 
   filter :tags
   filter :flagged
+  filter :reviews
 
   config.comments = true
 
