@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :agency_id, :roles
+  permit_params :email, :agency_id, :roles, :tag_list, :name
 
   index do
     column :email
@@ -20,6 +20,12 @@ ActiveAdmin.register User do
     if current_admin_user
       f.inputs "Roles" do
         f.input :roles, :as => :check_boxes
+      end
+
+      f.inputs "Tags" do
+        f.input :tag_list, :as => :check_boxes,
+                                 :multiple => :true,
+                                 :collection => ActsAsTaggableOn::Tag.all.map(&:name)
       end
     end
     f.actions
@@ -65,6 +71,9 @@ ActiveAdmin.register User do
         role_ids = params[:user][:role_ids]
         user.roles.clear()
         user.roles << role_ids.select{|id| !id.empty? }.map{|id| Role.find(id)}
+
+        user.tag_list = params[:user][:tag_list].join(", ")
+        user.save
       end
 
       super

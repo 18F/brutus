@@ -22,6 +22,7 @@ class HomeController < ApplicationController
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  # TODO move these to appropriate controllers
   def sync
     last_import = Import.last
     begin
@@ -32,17 +33,41 @@ class HomeController < ApplicationController
       else
         render :json => "You are currently viewing up-to-date data, last synced: #{last_import.created_at}. Refresh your browser to view the latest data.", :status => 400
       end
-    rescue
+    rescue Exception => e
       render :json => "I'm not sure what is going on.", :status => 200
+      logger.error e
     end
   end
 
+  # TODO 
+  # cleanup
   def app_details
     @client ||= SF_CLIENT
     @sf_fields ||= Rails.cache.read('SALESFORCE_APP_OBJECT_FIELDS')
+    @sf_labels ||= Rails.cache.read('SALESFORCE_APP_OBJECT_FIELD_LABELS')
+    @payload = { :fields => @sf_fields, :field_labels => @sf_lables, :projects => [] }
     @app = Application.find(params[:id])
-    # @detail = @client.select(ENV['SALESFORCE_APP_OBJECT'], @app.remote_key, @sf_fields)
-    @detail = @client.query("select #{Rails.cache.read('SALESFORCE_APP_OBJECT_FIELDS').join(", ")} from PIF_Application__c where PIF_Contact__c = '#{@app.remote_key}'").first
-    render :json => { :application => @detail, :fields => Rails.cache.read('SALESFORCE_APP_OBJECT_FIELDS') }
+    @app_detail = @client.query("select #{Rails.cache.read('SALESFORCE_APP_OBJECT_FIELDS').join(", ")} from PIF_Application__c where PIF_Contact__c = '#{@app.remote_key}'").first
+    @sf_projects = @client.query("select Id, IsDeleted, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, PIF_Application__c, PIF_Project_Name__c, Project_Fit__c from PIF_Project__c where PIF_Application__c = '#{@app_detail['Id']}'")
+    @project_detail = []
+    @sf_projects.each do |project|
+      @project_detail << { project['PIF_Project_Name__c'] => project['Project_Fit__c'] }
+    end
+
+    @payload[:application] = @app_detail
+    @payload[:projects] = @project_detail
+
+    render :json => @payload
+  end
+
+  def mark_junk
+    @application = Application.find(params[:id])
+    @application.junk = true
+    if @application.save
+      # redirect_to_back#, :alert => 'Marked as junk.'
+      redirect_to admin_applications_path, :notice => 'Successfully marked as junk.'
+    else
+      redirect_to_back#, :alert => "Unable to mark as junk."
+    end
   end
 end

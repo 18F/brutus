@@ -37,7 +37,7 @@ ActiveAdmin.register Review do
 
 
   controller do
-    after_filter :assign_user
+    after_filter :assign_user, :only => :create
 
     def assign_user
       @review.user_id = current_user.id

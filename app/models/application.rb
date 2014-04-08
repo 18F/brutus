@@ -3,14 +3,16 @@ class Application < ActiveRecord::Base
   tracked
   
   has_many :reviews, :dependent => :destroy
+  has_many :projects
 	validates_uniqueness_of :remote_key, :scope => :remote_source
-	acts_as_taggable
+	acts_as_taggable_on :tags, :projects
 	
 	def flagged?
+		rtn = false
 		self.reviews.each do |rev|
-			return true if rev.follow_up?
+			rtn = rev.follow_up?
 		end
-		false
+		rtn
 	end
 
 	def details
@@ -18,13 +20,10 @@ class Application < ActiveRecord::Base
 	end
 
 	def self.recent(num=10)
-		Application.limit(num).order(:created_at => :desc)
+		Application.where(:junk => false).limit(num).order(:created_at => :desc)
 	end
 
 	def self.flagged(num=10)
-		Application.where(:flagged => true)
-		# Review.where(:follow_up => true)
-		# Application.joins(:reviews).where('reviews.follow_up IS ?',true)
-		# Application.joins(:reviews).where(:flagged => true)
+		Application.where(:flagged => true, :junk => false).limit(num)
 	end
 end

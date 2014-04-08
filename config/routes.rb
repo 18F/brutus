@@ -8,8 +8,9 @@ Brutus::Application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
 
   # custom routes for sf
-  get '/sync' => 'home#sync'
-  get '/app_details/:id' => 'home#app_details'
+  get '/admin/sync' => 'home#sync'
+  get '/admin/app_details/:id' => 'home#app_details'
+  get '/admin/mark_junk/:id' => 'home#mark_junk', :as => :mark_junk
 
   # devise_for :users, ActiveAdmin::Devise.config
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}

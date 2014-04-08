@@ -1,13 +1,20 @@
-.panel
-	h3 Application Details
-	.panel_contents
-		.attributes_table.application
-			table cellspacing="0" cellpadding="0"
-				tbody
-					tr.row.row-id
-						th Details
-						td= @application.details.html_safe
+= simple_form_for  [:admin, @application, @review] do |f|
+	fieldset.inputs
+		ol
+			li.string.input.required.stringish
+				= f.input :score, :as => :select, :collection => (1..5)
+			li.string.input.stringish
+				= f.input :remarks
+			li.string.input
+				= f.input :follow_up
 
+		/ hidden fields
+		= f.input :application_id, :value => @application.id, :as => :hidden
+
+		= f.button :submit
+
+hr
+br
 
 sidebar
 	.panel
@@ -27,12 +34,15 @@ sidebar
 											div class="blank_slate_container"
 												span class="blank_slate" There are no reviews for this application.
 
-	= simple_form_for  [:admin, @application, @review] do |f|
-		= f.input :score, :as => :select, :collection => [1,2,3]
-		= f.input :remarks
-		= f.input :follow_up
+.panel
+	h3 Application Details
+	.panel_contents
+		.attributes_table.application
+			table cellspacing="0" cellpadding="0"
+				tbody
+					tr.row.row-id
+						th Details
+						td= @application.details.html_safe
 
-		/ hidden fields
-		= f.input :application_id, :value => @application.id, :as => :hidden
 
-		= f.button :submit
+

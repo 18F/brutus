@@ -8,7 +8,7 @@ ActiveAdmin.register_page "Dashboard" do
   recent_apps = Application.recent
 
   content :title => proc{ I18n.t("active_admin.dashboard") } do
-    panel "Flagged Applications (#{flagged.size} total)" do
+    panel "Flagged for Follow-up (#{flagged.size} total)" do
       if flagged.any?
         ul do
           flagged.each do |app|

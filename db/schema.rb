@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326185028) do
+ActiveRecord::Schema.define(version: 20140408051751) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -75,16 +75,6 @@ ActiveRecord::Schema.define(version: 20140326185028) do
     t.datetime "updated_at"
     t.string   "remote_source"
   end
-
-  create_table "projects", force: true do |t|
-    t.string   "name"
-    t.integer  "agency_id"
-    t.string   "salesforce_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "projects", ["agency_id"], name: "index_projects_on_agency_id"
 
   create_table "reviews", force: true do |t|
     t.integer  "user_id"
