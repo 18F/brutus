@@ -39,10 +39,15 @@ ActiveAdmin.register Review do
 
   controller do
     after_filter :assign_user, :only => :create
+    before_filter :set_crediting_plan, :only => [:new, :create]
 
     def assign_user
       @review.user_id = current_user.id
       @review.save
+    end
+
+    def set_crediting_plan
+      @crediting_plan = CreditingPlan.where(:active => true).first
     end
   end
 end

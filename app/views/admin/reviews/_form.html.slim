@@ -1,17 +1,33 @@
 = simple_form_for  [:admin, @application, @review] do |f|
+	/ hidden fields
+	= f.input :application_id, :value => @application.id, :as => :hidden
+	= f.input :remarks, :as => :hidden
+
+	/ TODO break this in to partials
 	fieldset.inputs
 		ol
-			li.string.input.required.stringish
-				= f.input :score, :as => :select, :collection => (1..5)
-			li.string.input.stringish
-				= f.input :remarks
+			- @crediting_plan.crediting_plan_categories.each do |cpc|
+				li.string
+					h3= cpc.name
+					p= cpc.description
+
+				li.string.input.required.stringish
+					label for="cpc-id-#{cpc.id}"
+						| Score
+					select id="cpc-id-#{cpc.id}" class="cpc"
+						- cpc.crediting_plan_assertions.each do |cpa|
+							option value="#{cpa.score}"= cpa.score.to_s + " - " + cpa.description
+				li.string.input.stringish id="cpa-desc-#{cpc.id}"
+
+				- cpc.crediting_plan_assertions.each do |cpa|
+					input type="hidden" value="#{cpa.description}" id="cpa-desc-#{cpa.id}"
+
+			hr 
 			li.string.input
 				= f.input :follow_up
 
-		/ hidden fields
-		= f.input :application_id, :value => @application.id, :as => :hidden
-
-		= f.button :submit
+			li.buttons
+				= f.button :submit
 
 hr
 br
