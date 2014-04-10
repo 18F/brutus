@@ -160,7 +160,7 @@ ActiveAdmin.setup do |config|
   #   config.register_stylesheet 'my_print_stylesheet.css', :media => :print
   #
   # To load a javascript file:
-  config.register_javascript 'fetch_apps.js'
+  config.register_javascript 'brutus.js'
   config.register_javascript 'jquery.linkify.min.js'
   # config.register_javascript 'jquery-1.10.2.js'
   config.register_javascript 'jquery-ui-1.10.4.custom.js'

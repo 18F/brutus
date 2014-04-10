@@ -5,7 +5,14 @@ ActiveAdmin.register Application do
   filter :flagged
   filter :junk
 
+  controller do
+    def resource
+      Application.where(: params[:id]).first!
+    end
+  end
+
   index do
+    h3 link_to "Developer", "#"
     column :id
     column :name
     column :remote_source
@@ -27,6 +34,8 @@ ActiveAdmin.register Application do
   show do |app|
     h3 link_to "Review Application", new_admin_application_review_path(app), :class => 'review_button'
     h3 link_to "Mark as Junk", mark_junk_path(app), :class => 'mark_junk' unless app.junk?
+    br
+    
     attributes_table do
       row :id
       row :status

@@ -14,7 +14,7 @@
 				li.string.input.required.stringish
 					label for="cpc-id-#{cpc.id}"
 						| Score
-					div#slider
+					div.score-slider
 					/ select id="cpc-id-#{cpc.id}" class="cpc"
 						/ - cpc.crediting_plan_assertions.each do |cpa|
 						/ 	option value="#{cpa.score}"= cpa.score.to_s + " - " + cpa.description

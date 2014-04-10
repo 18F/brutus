@@ -9,7 +9,6 @@ $(function () {
 			success: function (result) {
 				$('.fetch-app').data('details',result);
 				var _$details = $('<div id="details-'+app_id+'"><h4>General Information</h4></div>')
-				console.log(result);
 				var fields = result.fields;
 				for (var i=0;i<fields.length;i++) {
 					var field = fields[i];
@@ -67,7 +66,13 @@ $(function () {
 
 	// sliders
 	$( ".score-slider" ).slider({
-			range: true,
-			values: [ 0, 6 ]
-		});
+    value:0,
+    min: 0,
+    max: 6,
+    step: 1,
+    slide: function( event, ui ) {
+      $( "#amount" ).val( "$" + ui.value );
+    }
+  });
+  $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
 });
