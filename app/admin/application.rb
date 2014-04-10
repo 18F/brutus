@@ -3,7 +3,6 @@ ActiveAdmin.register Application do
 
   filter :tags
   filter :flagged
-  filter :vet_status
   filter :junk
 
   index do

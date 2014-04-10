@@ -56,6 +56,7 @@ $(function () {
 		return false;
 	});
 
+	// combine score of each Crediting Plan Competency
 	$('.cpc').change(function (e) {
 		_score = 0;
 		$('.cpc').each(function () {
@@ -63,4 +64,10 @@ $(function () {
 		});
 		$('.score').val(_score);
 	});
+
+	// sliders
+	$( ".score-slider" ).slider({
+			range: true,
+			values: [ 0, 6 ]
+		});
 });

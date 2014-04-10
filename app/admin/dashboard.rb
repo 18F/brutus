@@ -41,7 +41,7 @@ ActiveAdmin.register_page "Dashboard" do
             if recent_reviews.any?
               ul do
                 recent_reviews.each do |rev|
-                  li link_to rev.user.name, admin_application_review_path(rev.application, rev)
+                  li "#{rev.user.name} reviewed #{link_to(rev.application.name, admin_application_review_path(rev.application, rev))} #{time_ago_in_words(rev.updated_at)} ago".html_safe
                 end
               end
             else

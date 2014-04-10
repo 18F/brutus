@@ -153,7 +153,8 @@ ActiveAdmin.setup do |config|
   # and feel.
   #
   # To load a stylesheet:
-  config.register_stylesheet 'app_detail.css'
+  config.register_stylesheet 'brutus.css'
+  config.register_stylesheet 'jquery-ui-1.10.4.custom.css'
   #
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
   #   config.register_stylesheet 'my_print_stylesheet.css', :media => :print
@@ -161,7 +162,8 @@ ActiveAdmin.setup do |config|
   # To load a javascript file:
   config.register_javascript 'fetch_apps.js'
   config.register_javascript 'jquery.linkify.min.js'
-
+  # config.register_javascript 'jquery-1.10.2.js'
+  config.register_javascript 'jquery-ui-1.10.4.custom.js'
 
   # == CSV options
   #
