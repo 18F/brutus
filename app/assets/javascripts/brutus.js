@@ -55,24 +55,32 @@ $(function () {
 		return false;
 	});
 
-	// combine score of each Crediting Plan Competency
-	$('.cpc').change(function (e) {
-		_score = 0;
+	// sliders
+	$( ".score-slider" ).slider({
+    value: 0,
+    min: 0,
+    max: 5,
+    step: 1,
+    slide: function ( event, ui ) {
+    	$(this).find('.cpc').each( function () {
+    		$(this).val( ui.value );
+    	});
+    	updateScore();
+    }
+  });
+
+  var updateScore = function () {
+  	_score = 0;
 		$('.cpc').each(function () {
 			_score = _score + parseInt($(this).val());
 		});
+		_score = _score * 4;
 		$('.score').val(_score);
-	});
+		$('.score-text').html(_score);
+  }
 
-	// sliders
-	$( ".score-slider" ).slider({
-    value:0,
-    min: 0,
-    max: 6,
-    step: 1,
-    slide: function( event, ui ) {
-      $( "#amount" ).val( "$" + ui.value );
-    }
-  });
-  $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
+  updateScore();
 });
+
+
+

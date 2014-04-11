@@ -43,6 +43,9 @@ ActiveAdmin.register Review do
 
     def assign_user
       @review.user_id = current_user.id
+      # TODO revisit
+      # @application.status = 'under review'
+      # @application.save
       @review.save
     end
 
