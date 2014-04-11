@@ -1,47 +1,35 @@
-= simple_form_for  [:admin, @application, @review] do |f|
-	/ hidden fields
-	= f.input :application_id, :value => @application.id, :as => :hidden
-	= f.input :remarks, :as => :hidden
-
+.review-panel
 	/ TODO break this in to partials
-	fieldset.inputs
-		ol
-			- @crediting_plan.crediting_plan_categories.each do |cpc|
-				li.string
-					h3= cpc.name
-					p= cpc.description
+	- @crediting_plan.crediting_plan_categories.each do |cpc|
+		.cpc-box
+			.name= cpc.name
+			.desc= cpc.description
 
-				li.string.input.required.stringish
-					label for="cpc-id-#{cpc.id}"
-						| Score
-					div.score-slider
-					/ select id="cpc-id-#{cpc.id}" class="cpc"
-						/ - cpc.crediting_plan_assertions.each do |cpa|
-						/ 	option value="#{cpa.score}"= cpa.score.to_s + " - " + cpa.description
-				li.string.input.stringish id="cpa-desc-#{cpc.id}"
-
+			div.score-slider data-cpc_ic="#{cpc.id}"
+				input type="hidden" class="cpc" id="cpc-id-#{cpc.id}" value="0"
 				- cpc.crediting_plan_assertions.each do |cpa|
-					input type="hidden" value="#{cpa.description}" id="cpa-desc-#{cpa.id}"
+					input type="hidden" class="cpc-desc" value="#{cpa.description}" id="cpa-desc-#{cpa.id}"
 
-			li
-				hr 
-			li.string.input
-				= f.input :follow_up
 
-			li
-				hr
 
-			li.string
-				label Total score
-				input type="text" class="score" name="review[score]" readonly="readonly"
+.score-panel
+	.score-box
+		h4 Overall Score
+		h4.score-text
 
-			
+		= simple_form_for  [:admin, @application, @review] do |f|
+			/ hidden fields
+			= f.input :application_id, :value => @application.id, :as => :hidden
+			= f.input :remarks, :as => :hidden
+			/ hidden input
+			input type="hidden" class="score" name="review[score]" value="0"
 
-			li.buttons
-				= f.button :submit
 
-hr
-br
+			= f.input :follow_up
+			= f.button :submit
+
+
+br clear="both"
 
 sidebar
 	.panel

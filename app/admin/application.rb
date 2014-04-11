@@ -6,9 +6,9 @@ ActiveAdmin.register Application do
   filter :junk
 
   controller do
-    def resource
-      Application.where(: params[:id]).first!
-    end
+    # def resource
+    #   Application.where(: params[:id]).first!
+    # end
   end
 
   index do
