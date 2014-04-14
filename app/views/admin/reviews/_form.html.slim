@@ -3,10 +3,13 @@
 	- @crediting_plan.crediting_plan_categories.each do |cpc|
 		.cpc-box
 			.name= cpc.name
+			br clear="both"
 			.desc= cpc.description
+
 
 			div.score-slider data-cpc_ic="#{cpc.id}"
 				input type="hidden" class="cpc" id="cpc-id-#{cpc.id}" value="0"
+				.score-num 0
 				- cpc.crediting_plan_assertions.each do |cpa|
 					input type="hidden" class="cpc-desc" value="#{cpa.description}" id="cpa-desc-#{cpa.id}"
 
@@ -29,6 +32,7 @@
 			= f.button :submit
 
 
+br clear="both"
 br clear="both"
 
 sidebar

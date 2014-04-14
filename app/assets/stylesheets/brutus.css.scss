@@ -132,3 +132,28 @@ h3 {
   float: left;
   
 }
+.cpc-box {
+
+  .name {
+    font-size: 1.2em;
+    float: left;
+    width: 50%
+  }
+  .score-slider {
+    position: relative;
+  }
+  .score-num {
+    position: absolute;
+    top: -30px;
+    right: 0;
+  }
+}
+
+.score-text,
+.score-num {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #c1c1c1;
+  font-size: 2.0em;
+  text-align: center;
+}

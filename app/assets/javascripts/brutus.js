@@ -65,6 +65,10 @@ $(function () {
     	$(this).find('.cpc').each( function () {
     		$(this).val( ui.value );
     	});
+    	$(this).find('.score-num').each( function () {
+    		$(this).html( ui.value );
+    	});
+    	$(this).parent
     	updateScore();
     }
   });
