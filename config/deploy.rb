@@ -16,7 +16,7 @@ set :log_level, :debug
 # set :ssh_options, { :forward_agent => true }
 set :resque_environment_task, true
 
-set :linked_files, %w{config/database.yml config/application.yml config/redis/qa.conf config/newrelic.yml}
+set :linked_files, %w{config/database.yml config/application.yml config/newrelic.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/system}
 
 # EWW THIS IS UGLY
