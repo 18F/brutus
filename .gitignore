@@ -80,3 +80,5 @@ pickle-email-*.html
 
 /config/deploy/*
 *.rdb
+
+brakeman.html
