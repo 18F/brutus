@@ -124,15 +124,22 @@ h3 {
 }
 .review-panel,
 .score-panel {
-  border: 1px solid #C1C1C1;
   border-radius: 10px;
+  
+}
+.score-panel {
+  border: 1px solid #C1C1C1;
   padding: 10px 20px;
 }
 .score-panel {
-  float: left;
-  
+  width: 300px;
 }
+.sidepanel { float: left; width: 30%; }
 .cpc-box {
+  border: 1px solid #C1C1C1;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 40px;
 
   .name {
     font-size: 1.2em;
@@ -141,11 +148,24 @@ h3 {
   }
   .score-slider {
     position: relative;
+    margin: 10px 0;
   }
   .score-num {
     position: absolute;
     top: -30px;
     right: 0;
+  }
+  .desc {
+    width: 80%;
+    padding: 2px 0;
+  }
+  .desc-sel {
+    padding: 10px;
+    height: 40px;
+    border: 1px solid #ababab;
+    border-radius: 10px;
+    color: #444444;
+    margin: 4px 0 20px 0;
   }
 }
 

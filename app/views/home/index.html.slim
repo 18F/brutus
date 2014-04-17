@@ -1,13 +1,13 @@
 - if user_signed_in?
 	h1 Welcome to Brutus!
 	p You are currently logged in, however, your account does not have access to anything.
-	p To request access to the application, please email <a href="mailto:john.stone@gsa.gov?SUBJECT=Grant access to Brutus for #{current_user.email}">john.stone@gsa.gov</a>.
+	p Your request has been received <a href="mailto:john.stone@gsa.gov?SUBJECT=Grant access to Brutus for #{current_user.email}">john.stone@gsa.gov</a>.
 - else
-	h1 align="center"
-		= link_to "Sign in with MyUSA", signin_path
+	= link_to image_tag('sign-in-with-myusa.png'), signin_path
 
 br
 br
 br
 br
 br
+

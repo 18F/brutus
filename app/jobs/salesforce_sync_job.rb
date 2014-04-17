@@ -4,7 +4,7 @@ class SalesforceSyncJob
   def self.perform(import_id=nil)
     import_id ||= Import.last.id
     @client = SF_CLIENT || Restforce.new(:host => ENV['SALESFORCE_HOST'])
-    @contacts = @client.query("select Id from #{ENV['SALESFORCE_CONTACT_OBJECT']} where RecordTypeId = '01230000001DIkCAAW'")
+    @contacts = @client.query("select Id from #{ENV['SALESFORCE_CONTACT_OBJECT']}") #  where RecordTypeId = '01230000001DIkCAAW'
 
     new_apps = []
     @contacts.each do |contact|

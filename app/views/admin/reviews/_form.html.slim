@@ -10,10 +10,31 @@
 			div.score-slider data-cpc_ic="#{cpc.id}"
 				input type="hidden" class="cpc" id="cpc-id-#{cpc.id}" value="0"
 				.score-num 0
-				- cpc.crediting_plan_assertions.each do |cpa|
-					input type="hidden" class="cpc-desc" value="#{cpa.description}" id="cpa-desc-#{cpa.id}"
+				- cpc.crediting_plan_assertions.each_with_index do |cpa,i|
+					input type="hidden" class="cpc-desc-#{i+1}" value="#{cpa.description}" id="cpa-desc-#{cpa.id}"
+			.desc-sel
 
 
+.sidepanel
+	.panel
+			h3 Existing Reviews
+			.panel_contents
+				.attributes_table.review
+					table cellspacing="0" cellpadding="0"
+						tbody
+							tr.row.row-id
+								th Reviews
+								td
+									ul
+										- @application.reviews.each do |rev|
+											- if rev.id
+												li= link_to "Review #{rev.id}", admin_application_review_path(@application, rev)
+											- if @application.reviews.size == 1
+												div class="blank_slate_container"
+													span class="blank_slate" There are no reviews for this application.
+
+br clear="both"
+br clear="both"
 
 .score-panel
 	.score-box
@@ -29,29 +50,16 @@
 
 
 			= f.input :follow_up
+			small Use Follow Up to flag this application to be reviewed by another SME
+
+			br clear="both"
+			br clear="both"
+
 			= f.button :submit
 
 
 br clear="both"
 br clear="both"
-
-sidebar
-	.panel
-		h3 Existing Reviews
-		.panel_contents
-			.attributes_table.review
-				table cellspacing="0" cellpadding="0"
-					tbody
-						tr.row.row-id
-							th Reviews
-							td
-								ul
-									- @application.reviews.each do |rev|
-										- if rev.id
-											li= link_to "Review #{rev.id}", admin_application_review_path(@application, rev)
-										- if @application.reviews.size == 1
-											div class="blank_slate_container"
-												span class="blank_slate" There are no reviews for this application.
 
 .panel
 	h3 Application Details

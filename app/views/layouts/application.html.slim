@@ -8,7 +8,7 @@ html
     = csrf_meta_tags
   body class=("#{controller_name} #{action_name} #{user_signed_in? ? "user-signed-in" : ""}")
     header
-      = render 'layouts/navigation'
+      / = render 'layouts/navigation'
     main role="main"
       = render 'layouts/messages'
       = yield
@@ -18,7 +18,7 @@ html
           li= "There are #{@users.size} users in Brutus."
           li= "We have received #{@applications.size} applications."
           li= "We have created #{@reviews.size} reviews."
-      = image_tag('gsa_logo.jpg')
-      = image_tag('18f_logo.jpg')
-      = image_tag('salesforce_logo.jpg', :style => 'margin-top: 15px')
+      / = image_tag('gsa_logo.jpg')
+      / = image_tag('18f_logo.jpg')
+      / = image_tag('salesforce_logo.jpg', :style => 'margin-top: 15px')
       br clear="both"

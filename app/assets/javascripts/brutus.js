@@ -29,7 +29,6 @@ $(function () {
 			},
 			error: function (e) {
 				$('<p class="error">An error has occurred fetching the application details.</p>').insertAfter('.fetch-app');
-				console.log(e);
 				$('.loading').hide();
 			}
 		});
@@ -58,9 +57,10 @@ $(function () {
 	// sliders
 	$( ".score-slider" ).slider({
     value: 0,
-    min: 0,
-    max: 5,
+    min: 1,
+    max: 6,
     step: 1,
+
     slide: function ( event, ui ) {
     	$(this).find('.cpc').each( function () {
     		$(this).val( ui.value );
@@ -68,9 +68,22 @@ $(function () {
     	$(this).find('.score-num').each( function () {
     		$(this).html( ui.value );
     	});
-    	$(this).parent
+    	var _desc = $(this).parent().find('.desc-sel')
+    	$(this).find('.cpc-desc-'+ui.value).each( function () {
+    		var desc = $(this).val();
+    		_desc.html(desc);
+    	});
     	updateScore();
+    },
+
+    start: function( event, ui ) {
+    	var _desc = $(this).parent().find('.desc-sel')
+    	$(this).find('.cpc-desc-'+ui.value).each( function () {
+    		var desc = $(this).val();
+    		_desc.html(desc);
+    	});
     }
+
   });
 
   var updateScore = function () {
