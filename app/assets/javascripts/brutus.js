@@ -69,7 +69,7 @@ $(function () {
     		$(this).html( ui.value );
     	});
     	var _desc = $(this).parent().find('.desc-sel')
-    	$(this).find('.cpc-desc-'+ui.value).each( function () {
+    	$(this).find('.cpa-desc-'+ui.value).each( function () {
     		var desc = $(this).val();
     		_desc.html(desc);
     	});
@@ -78,7 +78,7 @@ $(function () {
 
     start: function( event, ui ) {
     	var _desc = $(this).parent().find('.desc-sel')
-    	$(this).find('.cpc-desc-'+ui.value).each( function () {
+    	$(this).find('.cpa-desc-'+ui.value).each( function () {
     		var desc = $(this).val();
     		_desc.html(desc);
     	});
@@ -87,14 +87,40 @@ $(function () {
   });
 
   var updateScore = function () {
-  	_score = 0;
+  	var _score = 0;
+  	var $_remarks_field = $('#review_remarks');
+  	var _remarks = []
 		$('.cpc').each(function () {
 			_score = _score + parseInt($(this).val());
+		});
+		$('.score-slider').each( function () {
+			var _score = $(this).find('.cpc').val();
+			var _desc = $(this).find('.cpa-desc-'+_score).val();
+			var _name = $(this).find('.cpc-name').val();
+			_remarks.push(_name + " - " + _desc);
 		});
 		_score = _score * 4;
 		$('.score').val(_score);
 		$('.score-text').html(_score);
+		$_remarks_field.val('');
+		for (var i = 0;i<=_remarks.length;i++) {
+			$_remarks_field.val($_remarks_field.val() + _remarks[i] + '\r\n\r\n');
+		}
   }
+
+  $('#review_follow_up').click(function () {
+  	if ($(this).is(':checked')) {
+  		$('.score').data('score',$(this).val());
+  		$('.score').val(0);
+  		$('.score-text').html('<span style="color: green;">FLAGGED</span>');
+  		$('.score-slider').hide();
+  	} else {
+  		updateScore();
+  		$('.score-slider').show();
+  	}
+  	
+
+  });
 
   updateScore();
 });

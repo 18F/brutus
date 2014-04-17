@@ -12,7 +12,7 @@ ActiveAdmin.register Application do
   end
 
   index do
-    h3 link_to "Developer", "#"
+    # h3 link_to "Developer", "#"
     column :id
     column :name
     column :remote_source

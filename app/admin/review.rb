@@ -30,7 +30,7 @@ ActiveAdmin.register Review do
       row :id
       row :score
       row :follow_up
-      row :remarks
+      row :remarks, :as => :html_safe
     end
   end
 

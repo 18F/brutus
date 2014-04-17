@@ -9,9 +9,10 @@
 
 			div.score-slider data-cpc_ic="#{cpc.id}"
 				input type="hidden" class="cpc" id="cpc-id-#{cpc.id}" value="0"
+				input type="hidden" class="cpc-name" value="#{cpc.name}"
 				.score-num 0
 				- cpc.crediting_plan_assertions.each_with_index do |cpa,i|
-					input type="hidden" class="cpc-desc-#{i+1}" value="#{cpa.description}" id="cpa-desc-#{cpa.id}"
+					input type="hidden" class="cpa-desc-#{i+1}" value="#{i+1} - #{cpa.description}" id="cpa-desc-#{cpa.id}"
 			.desc-sel
 
 
@@ -44,7 +45,7 @@ br clear="both"
 		= simple_form_for  [:admin, @application, @review] do |f|
 			/ hidden fields
 			= f.input :application_id, :value => @application.id, :as => :hidden
-			= f.input :remarks, :as => :hidden
+			= f.input :remarks, :as => :hidden, :id => :remarks
 			/ hidden input
 			input type="hidden" class="score" name="review[score]" value="0"
 
