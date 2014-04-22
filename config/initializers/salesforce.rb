@@ -1,8 +1,4 @@
-if ENV['SALESFORCE_CLIENT_SECRET'] == "secret"
-  # Rails.logger doesn't work in an initializer
-  logger = Logger.new(STDOUT)
-  logger.error("********* Salesforce not configured.  Sync will not work! *********")
-else
+begin
   client = Restforce.new(:host => ENV['SALESFORCE_HOST'])
 
   objects = [
@@ -22,4 +18,7 @@ else
 
 
   SF_CLIENT = client
+rescue Exception
+  puts "!!! ERROR !!! There was an issue connecting to Salesforce!"
+  puts $!, $@
 end
