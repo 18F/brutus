@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/amoose/restforce.git
+  revision: 6b884cbb8be53111aff6dfe494c113a1c7956817
+  specs:
+    restforce (1.4.3)
+      faraday (~> 0.8.4)
+      faraday_middleware (>= 0.8.8)
+      hashie (>= 1.2.0, < 2.1)
+      json (>= 1.7.5, < 1.9.0)
+
+GIT
   remote: git://github.com/gregbell/active_admin.git
   revision: 388ed07e477af5f5644d0c30cd45b4377c886dd7
   specs:
@@ -147,8 +157,8 @@ GEM
       railties (>= 3.0.0)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
-    faraday_middleware (0.9.0)
-      faraday (>= 0.7.4, < 0.9)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
@@ -302,11 +312,6 @@ GEM
       redis (>= 2.0.1)
       resque (>= 1.20.0)
       rufus-scheduler
-    restforce (1.4.3)
-      faraday (~> 0.8.4)
-      faraday_middleware (>= 0.8.8)
-      hashie (>= 1.2.0, < 2.1)
-      json (>= 1.7.5, < 1.9.0)
     rolify (3.2.0)
     rspec-core (2.14.7)
     rspec-expectations (2.14.4)
@@ -421,7 +426,7 @@ DEPENDENCIES
   redis-namespace
   redis-rails
   resque (~> 2.0.0.pre.1)!
-  restforce
+  restforce!
   rolify
   rspec-rails
   sass-rails (~> 4.0.0)
