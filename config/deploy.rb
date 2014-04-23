@@ -5,6 +5,7 @@ set :repo_url, 'git@github.com:18F/brutus.git'
 
 set :scm, :git
 set :default_stage, :qa
+# set :branch, :master
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 set :deploy_to, '/var/www/brutus'
 set :current_path, "#{deploy_to}/current"
@@ -13,7 +14,7 @@ set :use_sudo, :false
 set :format, :pretty
 set :log_level, :debug
 # set :pty, true
-# set :ssh_options, { :forward_agent => true }
+set :ssh_options, { :forward_agent => true }
 set :resque_environment_task, true
 
 set :linked_files, %w{config/database.yml config/application.yml config/newrelic.yml}
