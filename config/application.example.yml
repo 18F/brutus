@@ -8,6 +8,7 @@ ADMIN_PASSWORD: pass
 MYUSA_OAUTH_PROVIDER_KEY: key
 MYUSA_OAUTH_PROVIDER_SECRET: secret
 MYUSA_HOME: https://my.usa.gov
+MYUSA_SCOPES: profile.email
 
 ROLES: [admin, user, SME]
 
