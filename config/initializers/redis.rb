@@ -2,8 +2,12 @@ require "redis"
 
 if Rails.env == 'production' or Rails.env == 'qa' or Rails.env == 'staging'
 	# $REDIS = Redis::Namespace.new("brutus", :redis => Redis.new(:path => ENV['REDIS_SOCK']))
-	$REDIS = Redis.new(:path => ENV['REDIS_SOCK'])
-	Rails.logger.info "Connecting to redis at #{ENV['REDIS_SOCK']}"
+	if ENV['REDIS_SOCK']
+		$REDIS = Redis.new(:path => ENV['REDIS_SOCK'])
+		puts "Connecting to redis at #{ENV['REDIS_SOCK']}"
+	elsif ENV['REDIS_HOST']
+		$REDIS = Redis.new(:host => ENV['REDIS_HOST'], :port => ENV['REDIS_PORT'])
+	end
 else
 	redis_conf = File.read(Rails.root.join("config/redis", "#{Rails.env}.conf"))
 	conf_file = Rails.root.join("config/redis", "#{Rails.env}.conf").to_s
