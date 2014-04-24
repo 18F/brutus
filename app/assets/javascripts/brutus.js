@@ -113,10 +113,10 @@ $(function () {
   		$('.score').data('score',$(this).val());
   		$('.score').val(0);
   		$('.score-text').html('<span style="color: green;">FLAGGED</span>');
-  		$('.score-slider').hide();
+  		// $('.score-slider').hide();
   	} else {
   		updateScore();
-  		$('.score-slider').show();
+  		// $('.score-slider').show();
   	}
   	
 
