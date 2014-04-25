@@ -17,7 +17,7 @@ class SalesforceSyncJob
         end
         new_app.tag_list = detail['Skills__c'].split(';').join(', ') if detail['Skills__c']
         new_app.name = detail['Applicant_Name__c']
-        new_app.application_id = detail['Id']
+        new_app.application_id = detail['Name']
         new_app.save
         new_apps << new_app
       end
