@@ -1,7 +1,11 @@
 - if user_signed_in?
 	h1 Welcome to Hire-EZ v2!
 	p You are currently logged in, however, your account does not have access to anything.
-	p In order to be promoted to a SME, please contact <a href="mailto:john.stone@gsa.gov?SUBJECT=Grant access to Brutus for #{current_user.email}">john.stone@gsa.gov</a>.
+	p An admin has been notified of this activity and will promote your account if necessary. If you have any questions, please email: <a href="mailto:john.stone@gsa.gov">john.stone@gsa.gov</a>.
+
+	br
+	= link_to "Sign out", signout_path
+
 - else
 	= link_to image_tag('sign-in-with-myusa.png'), signin_path
 

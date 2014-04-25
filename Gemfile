@@ -28,6 +28,7 @@ gem 'restforce', :github => 'amoose/restforce'
 gem 'dalli'
 gem 'public_activity'
 gem 'newrelic_rpm'
+gem 'twilio-ruby', '~> 3.11'
 
 group :development do
   gem 'better_errors'

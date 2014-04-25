@@ -42,7 +42,12 @@ section {
 
 
 main {
-  background: #ffffff;
+  background: transparent none;
+}
+
+body {
+  background: asset-url('ideo-bg1.jpg') no-repeat center center;
+  background-size: cover;
 }
 
 .loading {

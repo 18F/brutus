@@ -11,6 +11,15 @@ namespace :salesforce do
 		puts "*** DONE ***"
 	end
 
+	task :wipe_and_resync => :environment do
+		puts "*** DELETING EXISTING APPLICATIONS ***"
+		puts Application.destroy_all
+		puts "*** SYNCING WITH SALESFORCE ***"
+		new_import = Import.create
+    Resque.enqueue(SalesforceSyncJob, new_import.id)
+    puts "*** DONE ***"
+	end
+
 end
 
 task :clear_cache => :environment do
