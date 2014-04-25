@@ -10,10 +10,27 @@ class Application < ActiveRecord::Base
 	before_save :generate_tags
 
 	BUCKETS = {
-		:designer => [],
-		:developer => [],
-		:product => [],
-		:business => []
+		:designer => [
+				"Data Visualization",
+				"Graphic Design",
+				"User Experience (UX/UI)",
+			],
+		:developer => [
+				"Data Analysis",
+				"Web Developer (back-end)",
+				"Web Developer (front-end)"
+			],
+		:product => [
+				"Product Management",
+				"Project Management"
+			],
+		:business => [
+				"Business Development / Sales",
+				"Entrepreneurship",
+				"Evangelism / Public Speaking",
+				"Human Resources",
+				"Legal"
+			]
 	}
 	
 	def flagged?
@@ -30,7 +47,7 @@ class Application < ActiveRecord::Base
 
 	# skills >> tags taxonomy
 	def generate_tags
-
+		self.tag
 	end
 
 	def self.tagged_like_user(user_id)

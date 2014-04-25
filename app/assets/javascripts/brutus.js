@@ -57,16 +57,17 @@ $(function () {
 	// sliders
 	$( ".score-slider" ).slider({
     value: 0,
-    min: 1,
-    max: 6,
+    min: 0,
+    max: 5,
     step: 1,
 
     slide: function ( event, ui ) {
+    	var _score = ui.value;
     	$(this).find('.cpc').each( function () {
-    		$(this).val( ui.value );
+    		$(this).val( _score );
     	});
     	$(this).find('.score-num').each( function () {
-    		$(this).html( ui.value );
+    		$(this).html( _score );
     	});
     	var _desc = $(this).parent().find('.desc-sel')
     	$(this).find('.cpa-desc-'+ui.value).each( function () {

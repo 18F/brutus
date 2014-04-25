@@ -12,7 +12,7 @@
 				input type="hidden" class="cpc-name" value="#{cpc.name}"
 				.score-num 0
 				- cpc.crediting_plan_assertions.each_with_index do |cpa,i|
-					input type="hidden" class="cpa-desc-#{i+1}" value="#{i+1} - #{cpa.description}" id="cpa-desc-#{cpa.id}"
+					input type="hidden" class="cpa-desc-#{i}" value="#{i} - #{cpa.description}" id="cpa-desc-#{cpa.id}"
 			.desc-sel
 
 
