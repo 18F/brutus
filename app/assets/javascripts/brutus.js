@@ -43,8 +43,6 @@ $(function () {
 			// contentType: 'application/json',
 			success: function (result) {
 				alert(result.responseText);
-				// console.log(document.location);
-				window.location.href = window.document.location+"?sync=success&no_cache="+rand;
 			},
 			error: function (exc) {
 				alert(exc.responseText);
