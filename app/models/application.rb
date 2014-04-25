@@ -57,7 +57,7 @@ class Application < ActiveRecord::Base
 	end
 
 	def self.recent(num=10)
-		Application.where(:junk => false).limit(num).order(:created_at => :desc)
+		Application.where(:junk => false).order_by_rand.limit(num).all
 	end
 
 	def self.flagged(num=10)

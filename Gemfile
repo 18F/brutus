@@ -29,6 +29,7 @@ gem 'dalli'
 gem 'public_activity'
 gem 'newrelic_rpm'
 gem 'twilio-ruby', '~> 3.11'
+gem 'randumb'
 
 group :development do
   gem 'better_errors'

@@ -22,7 +22,7 @@ ActiveAdmin.register_page "Dashboard" do
 
     columns do
       column do
-        panel "Recent Applications (#{Application.all.size} total)" do
+        panel "Unreviewed Applications (#{Application.all.size} total)" do
           if recent_apps.any?
             ul do
               recent_apps.each do |app|
