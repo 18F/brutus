@@ -47,7 +47,7 @@ class Application < ActiveRecord::Base
 
 	# skills >> tags taxonomy
 	def generate_tags
-		self.tag
+		# self.tag
 	end
 
 	def self.tagged_like_user(user_id)
