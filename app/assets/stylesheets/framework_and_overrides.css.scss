@@ -17,7 +17,7 @@ main {
   background-color: #eee;
   padding-bottom: 80px;
   width: 100%;
-  margin-top: 71px; // accommodate the navbar
+  padding: 40px 80px;
   }
 section {
   @extend .row;
@@ -42,7 +42,12 @@ section {
 
 
 main {
-  background: #ffffff;
+  background: transparent none;
+}
+
+body {
+  background: image-url('ideo-bg1.jpg') no-repeat center center;
+  background-size: cover;
 }
 
 .loading {

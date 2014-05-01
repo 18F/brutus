@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   belongs_to :agency
 
   after_create :add_roles
+  after_create :notify_admin
 
   validates_presence_of :name
   validates_uniqueness_of :email
@@ -20,6 +21,10 @@ class User < ActiveRecord::Base
   def add_roles
     add_role :admin if User.count == 1 # make the first user an admin
     add_role :user
+  end
+
+  def notify_admin
+    Resque.enqueue(NotifyAdminJob, "User created: #{self.name}")
   end
 
   def log_sign_in(ip,auth)

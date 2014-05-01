@@ -9,6 +9,12 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_is
   helper_method :current_admin_user
 
+  ensure_security_headers(
+    :hsts => {:max_age => 631138519, :include_subdomains => false},
+    :x_frame_options  => {:value => 'SAMEORIGIN'},
+    :x_xss_protection => {:value => 1, :mode => 'block'},
+    :x_content_type_options => {:value => 'nosniff'}
+  )
   def access_denied
 
   end

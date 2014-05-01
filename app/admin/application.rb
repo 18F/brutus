@@ -4,6 +4,8 @@ ActiveAdmin.register Application do
   filter :tags
   filter :flagged
   filter :junk
+  filter :name
+  filter :salesforce_id, :label => "Salesforce ID"
 
   controller do
     # def resource

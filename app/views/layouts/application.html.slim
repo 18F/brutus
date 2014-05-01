@@ -1,7 +1,7 @@
 html
   head
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title= content_for?(:title) ? yield(:title) : 'Brutus'
+    title= content_for?(:title) ? yield(:title) : "HireEZ v2 [#{Rails.env}]"
     meta content=(content_for?(:description) ? yield(:description) : "Brutus") name="description" 
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
@@ -15,10 +15,9 @@ html
     div.footer
       div style="float: left; width: 500px; padding: 10px 20px;"
         ul
-          li= "There are #{@users.size} users in Brutus."
+          li= "There are #{@users.size} users in Hire-EZ v2."
           li= "We have received #{@applications.size} applications."
           li= "We have created #{@reviews.size} reviews."
-      / = image_tag('gsa_logo.jpg')
-      / = image_tag('18f_logo.jpg')
-      / = image_tag('salesforce_logo.jpg', :style => 'margin-top: 15px')
+      .tagline
+        p It's HireEZier!
       br clear="both"
