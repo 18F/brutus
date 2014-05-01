@@ -1,3 +1,15 @@
+// font-family: 'Quicksand', 'sans-serif';
+// font-family: 'Lora', 'serif';
+.site_title,
+h1, h2, h3, h4,
+.breadcrumb {
+  font-family: 'Quicksand', 'sans-serif';
+}
+
+body {
+  font-family: 'Lora', 'serif';
+}
+
 .field {
   display: block;
   padding: 4px 8px;
@@ -136,13 +148,13 @@ h3 {
 }
 .sidepanel { float: left; width: 30%; }
 .cpc-box {
-  border: 1px solid #C1C1C1;
+  border: 1px solid red;
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 40px;
 
   .name {
-    font-size: 1.2em;
+    font-size: 1.6em;
     float: left;
     width: 50%
   }
@@ -176,4 +188,37 @@ h3 {
   border: 1px solid #c1c1c1;
   font-size: 2.0em;
   text-align: center;
+}
+
+.loading .blank_slate {
+  border: 0 none;
+}
+
+span.tag {
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  font-size: 0.8em;
+  padding: 2px 5px;
+  margin: 0 5px;
+}
+
+h5 span.tag {
+  font-size: 2.0em;
+}
+
+.tag.Product {
+  border-color: #ce0b67;
+  color: #ce0b67;
+}
+.tag.Business {
+  border-color: #1cbf46;
+  color: #1cbf46;
+}
+.tag.Developer {
+  border-color: #b9ab11;
+  color: #b9ab11;
+}
+.tag.Designer {
+  border-color: #1b3089;
+  color: #1b3089;
 }

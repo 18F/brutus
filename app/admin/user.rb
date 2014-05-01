@@ -25,7 +25,8 @@ ActiveAdmin.register User do
       f.inputs "Tags" do
         f.input :tag_list, :as => :check_boxes,
                                  :multiple => :true,
-                                 :collection => ActsAsTaggableOn::Tag.all.map(&:name)
+                                 # :collection => ActsAsTaggableOn::Tag.all.map(&:name)
+                                 :collection => Application::BUCKETS.collect { |b| b[0].to_s.titleize }
       end
     end
     f.actions

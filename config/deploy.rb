@@ -2,18 +2,22 @@
 
 set :application, 'brutus'
 set :repo_url, 'git@github.com:18F/brutus.git'
-
 set :scm, :git
+
+set :branch, :auto_tagging
+
+
+
 set :default_stage, :qa
-# set :branch, :master
-ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 set :deploy_to, '/var/www/brutus'
 set :current_path, "#{deploy_to}/current"
 set :shared_path, "#{deploy_to}/shared"
 set :use_sudo, :false
 set :format, :pretty
 set :log_level, :debug
-# set :pty, true
+
+set :pty, true
 set :ssh_options, { :forward_agent => true }
 set :resque_environment_task, true
 

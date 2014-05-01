@@ -11,16 +11,22 @@ $(function () {
 				var _$details = $('<div id="details-'+app_id+'"><h4>General Information</h4></div>')
 				var fields = result.fields;
 				for (var i=0;i<fields.length;i++) {
-					var field = fields[i];
-					if (field)
-						_$details.append('<div class="field"><span class="label">'+field+'</span><span class="value">'+result.application[field]+'</span><br clear="both" /></div>')
+					var _field = fields[i];
+					console.log(_field);
+					// console.log(_field[1])
+					var _value = result.application[Object.keys(_field)[0]]|| '';
+					var _label = _field[Object.keys(_field)[0]];
+					console.log(_value);
+					if (_field)
+						_$details.append('<div class="field"><span class="label">'+_label+'</span><span class="value">'+_value+'</span><br clear="both" /></div>')
 				}
 				_$details.append('<br /><br /><h4>Projects</h4>');
 				var projects = result.projects;
 				for (var i=0;i<projects.length;i++) {
-					var project = projects[i];
-					for (var project_name in project) {
-						_$details.append('<div class="field"><span class="label">'+project_name+'</span><span class="value">'+project[project_name]+'</span><br clear="both" /></div>')	
+					var _project = projects[i];
+					for (var _project_name in _project) {
+						var _project_justification = _project[_project_name] || '';
+						_$details.append('<div class="field"><span class="label">'+_project_name+'</span><span class="value">'+_project_justification+'</span><br clear="both" /></div>')	
 					}
 				}
 				$('.loading').hide();
@@ -117,11 +123,124 @@ $(function () {
   		updateScore();
   		// $('.score-slider').show();
   	}
-  	
 
   });
 
   updateScore();
+
+
+  // DASHBOARD
+  $( '.ajax_flagged_apps' ).each(function () {
+  	var _url = '/admin/fetch_flagged_apps/'
+  	var _tag_list = $(this).data('tag_list');
+  	var _$div = $(this);
+  		_url = _url + "?tag_list=" + _tag_list;
+  	$.ajax({
+			url: _url,
+			type: 'GET',
+			contentType: 'application/json',
+			async: true,
+			success: function (result) {
+				_$div.html(result);
+				_$div.removeClass('loading');
+				if (result.length == 0) {
+					_$div.html('<span class="blank_slate">Nothing flagged for follow-up at this time.</span>');
+				} else {
+					_$div.html('<ul></ul>');
+					_$list = _$div.find('ul');
+					for (var _i = 0; _i < result.length; _i++) {
+						var _tags = result[_i]['tag_list'];
+						var _tag_list = "";
+						for (var _t = 0; _t < _tags.length; _t++) {
+							_tag_list += "<span class='tag'>" + _tags[_t] + "</span>";
+						}
+						_$list.append("<li><a href='/admin/applications/" + result[_i]['id'] + "/'>" + result[_i]['name'] + "</a>" + _tag_list + "</li>");
+					}
+				}
+				colorizeTags();
+			},
+			error: function (exc) {
+				_$div.html(result);
+				_$div.removeClass('loading');
+			}
+		});
+  });
+
+  // unreviewed/recent apps
+  $( '.ajax_recent_apps' ).each(function () {
+  	var _url = '/admin/fetch_recent_apps/'
+  	var _tag_list = $(this).data('tag_list');
+  	var _$div = $(this);
+  		_url = _url + "?tag_list=" + _tag_list;
+  	$.ajax({
+			url: _url,
+			type: 'GET',
+			contentType: 'application/json',
+			async: true,
+			success: function (result) {
+				_$div.removeClass('loading');
+				if (result.length == 0) {
+					_$div.html('<span class="blank_slate">Nothing to review at this time.</span>');
+				} else {
+					_$div.html('<ul></ul>');
+					_$list = _$div.find('ul');
+					for (var _i = 0; _i < result.length; _i++) {
+						var _tags = result[_i]['tag_list'];
+						var _tag_list = "";
+						for (var _t = 0; _t < _tags.length; _t++) {
+							_tag_list += "<span class='tag'>" + _tags[_t] + "</span>";
+						}
+						_$list.append("<li><a href='/admin/applications/" + result[_i]['id'] + "/'>" + result[_i]['name'] + "</a>" + _tag_list + "</li>");
+					}
+				}
+				colorizeTags();
+			},
+			error: function (exc) {
+				_$div.html(exc);
+				_$div.removeClass('loading');
+			}
+		});
+  });
+
+  // recent reviews
+  $( '.ajax_recent_reviews' ).each(function () {
+  	var _url = '/admin/fetch_recent_reviews/'
+  	var _tag_list = $(this).data('tag_list');
+  	var _$div = $(this);
+  		_url = _url + "?tag_list=" + _tag_list;
+  	$.ajax({
+			url: _url,
+			type: 'GET',
+			contentType: 'application/json',
+			async: true,
+			success: function (result) {
+				_$div.removeClass('loading');
+				if (result.length == 0) {
+					_$div.html('<span class="blank_slate">No recent reviews at this time.</span>');
+				} else {
+					_$div.html('<ul></ul>');
+					_$list = _$div.find('ul');
+					for (var _i = 0; _i < result.length; _i++) {
+						_$list.append("<li>" + result[_i]['reviewer']['name'] + " reviewed <a href='/admin/applications/" + result[_i]['application_id'] + "/reviews/" + result[_i]['id'] + "'>" + result[_i]['applicant']['name'] + "</a></li>");
+					}
+				}
+			},
+			error: function (exc) {
+				_$div.html(exc);
+				_$div.removeClass('loading');
+			}
+		});
+  });
+
+  // colorizing tags
+  var colorizeTags = function () {
+  	$('.tag').each(function () {
+	  	var _tag = $(this).html();
+	  	var _$elm = $(this);
+	  	_$elm.addClass(_tag);
+	  });
+  }
+  colorizeTags();
 });
 
 

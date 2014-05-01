@@ -15,6 +15,19 @@ class Review < ActiveRecord::Base
 		self.application.save
 	end
 
+	def reviewer
+		{
+			:user_id => self.user.id,
+			:name => self.user.name
+		}
+  end
+
+  def applicant
+  	{
+  		:name => self.application.name
+  	}
+  end
+
 	def self.recent(num=10)
 		Review.limit(num).order(:created_at => :desc)
 	end

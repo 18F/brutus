@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   acts_as_taggable
 
+  # devise :omniauthable, :trackable
+
   def has_gov_email?
     return %w{ .gov .mil .fed.us }.any? {|x| self.email.end_with?(x)}
   end
@@ -25,6 +27,18 @@ class User < ActiveRecord::Base
 
   def notify_admin
     Resque.enqueue(NotifyAdminJob, "User created: #{self.name}")
+  end
+
+  def like_apps
+    Application.tagged_with(self.tag_list, :any => true)
+  end
+
+  def fancy_tag_list
+    str = ""
+    self.tag_list.each do |tag|
+      str = str + "<span class='tag'>#{tag}</span>"
+    end
+    return str.html_safe
   end
 
   def log_sign_in(ip,auth)

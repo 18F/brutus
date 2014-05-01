@@ -4,6 +4,7 @@ html
     title= content_for?(:title) ? yield(:title) : "HireEZ v2 [#{Rails.env}]"
     meta content=(content_for?(:description) ? yield(:description) : "Brutus") name="description" 
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "//fonts.googleapis.com/css?family=Lora:400,700|Quicksand"
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   body class=("#{controller_name} #{action_name} #{user_signed_in? ? "user-signed-in" : ""}")
@@ -13,11 +14,12 @@ html
       = render 'layouts/messages'
       = yield
     div.footer
-      div style="float: left; width: 500px; padding: 10px 20px;"
-        ul
-          li= "There are #{@users.size} users in Hire-EZ v2."
-          li= "We have received #{@applications.size} applications."
-          li= "We have created #{@reviews.size} reviews."
+      / div style="float: left; width: 500px; padding: 10px 20px;"
+      /   ul
+      /     li= "There are #{@users.size} users in Hire-EZ v2."
+      /     li= "We have received #{@applications.size} applications."
+      /     li= "We have created #{@reviews.size} reviews."
       .tagline
-        p It's HireEZier!
+        p "It's HireEZ-ier!"
+      = link_to(image_tag('18f.jpg'), "http://18f.gsa.gov")
       br clear="both"

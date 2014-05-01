@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
     :hsts => {:max_age => 631138519, :include_subdomains => false},
     :x_frame_options  => {:value => 'SAMEORIGIN'},
     :x_xss_protection => {:value => 1, :mode => 'block'},
-    :x_content_type_options => {:value => 'nosniff'}
+    :x_content_type_options => {:value => 'nosniff'},
+    :csp => false
   )
   def access_denied
 

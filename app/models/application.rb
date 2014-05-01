@@ -5,9 +5,10 @@ class Application < ActiveRecord::Base
   has_many :reviews, :dependent => :destroy
   has_many :projects
 	validates_uniqueness_of :remote_key, :scope => :remote_source
-	acts_as_taggable_on :tags, :projects
+	acts_as_taggable_on :tags, :projects, :skills
 
 	before_save :generate_tags
+	before_save :update_status
 
 	BUCKETS = {
 		:designer => [
@@ -32,35 +33,58 @@ class Application < ActiveRecord::Base
 				"Legal"
 			]
 	}
-	
-	def flagged?
-		rtn = false
-		self.reviews.each do |rev|
-			rtn = rev.follow_up?
-		end
-		rtn
-	end
 
 	def details
 		"<div class='loading'></div><input class='fetch-app' data-appid='#{self.id}' type='hidden' />".html_safe
 	end
 
+	def fancy_tag_list
+		str = ""
+		self.tag_list.each do |tag|
+			str = str + "<span class='tag'>#{tag}</span>"
+		end
+		return str.html_safe
+	end
+
+	private
 	# skills >> tags taxonomy
 	def generate_tags
-		# self.tag
+		self.skill_list.each do |tag|
+			BUCKETS.each do |bucket|
+				self.tag_list.add(bucket[0].to_s.titleize) if bucket[1].include? tag
+			end
+		end
+	end
+
+	def update_status
+		if self.reviews.any?
+			self.status = 'reviewed'
+		end
+		if self.flagged?
+			self.status = 'flagged'
+		end
+		if self.junk?
+			self.status = 'junk'
+		end
 	end
 
 	def self.tagged_like_user(user_id)
-		
-		# User.tagged_with(["awesome", "cool"], :any => true)
-		# Application.where(:)
-	end
-
-	def self.recent(num=10)
 		Application.where(:junk => false).order_by_rand.limit(num).all
 	end
 
-	def self.flagged(num=10)
-		Application.where(:flagged => true, :junk => false).limit(num)
+	def self.recent(num=10,tag_list='')
+		unless tag_list.blank?
+			@apps = Application.tagged_with(tag_list, :any => true).where(:junk => false, :status => 'unreviewed').order_by_rand.limit(num).all
+		else
+			@apps = Application.where(:junk => false, :status => 'unreviewed').order_by_rand.limit(num).all
+		end
+	end
+
+	def self.flagged(num=10,tag_list='')
+		unless tag_list.blank?
+			@apps = Application.tagged_with(tag_list, :any => true).where(:flagged => true, :junk => false).order_by_rand.limit(num).all
+		else
+			@apps = Application.where(:flagged => true, :junk => false).order_by_rand.limit(num).all
+		end
 	end
 end

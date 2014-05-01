@@ -5,7 +5,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Brutus"
+  config.site_title = "HireEZ v2"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -131,7 +131,8 @@ ActiveAdmin.setup do |config|
   #
   # Enable and disable Batch Actions
   #
-  config.batch_actions = true
+  # TODO enable batch actions
+  config.batch_actions = false
 
 
   # == Controller Filters
@@ -155,6 +156,7 @@ ActiveAdmin.setup do |config|
   # To load a stylesheet:
   config.register_stylesheet 'brutus.css'
   config.register_stylesheet 'jquery-ui-1.10.4.custom.css'
+  config.register_stylesheet '//fonts.googleapis.com/css?family=Lora:400,700|Quicksand'
   #
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
   #   config.register_stylesheet 'my_print_stylesheet.css', :media => :print
