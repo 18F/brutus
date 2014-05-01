@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:sync, :app_details]
+  before_filter :authenticate_user!, :except => [:index]
 
   def index
     redirect_to admin_root_path if current_admin_user or current_sme_user
@@ -40,14 +40,14 @@ class HomeController < ApplicationController
   end
 
   # TODO 
-  # cleanup
+  # cleanup and move these methods to appropriate controller
   def app_details
     @client ||= SF_CLIENT
     @sf_fields ||= Rails.cache.read('SALESFORCE_APP_OBJECT_FIELDS')
-    @sf_labels ||= Rails.cache.read('SALESFORCE_APP_OBJECT_FIELD_LABELS')
-    @payload = { :fields => @sf_fields, :field_labels => @sf_lables, :projects => [] }
+    @sf_field_metadata ||= Rails.cache.read('SALESFORCE_APP_OBJECT_FIELD_METADATA')
+    @payload = { :fields => @sf_field_metadata, :projects => [] }
     @app = Application.find(params[:id])
-    @app_detail = @client.query("select #{Rails.cache.read('SALESFORCE_APP_OBJECT_FIELDS').join(", ")} from PIF_Application__c where PIF_Contact__c = '#{@app.remote_key}'").first
+    @app_detail = @client.query("select #{Rails.cache.read('SALESFORCE_APP_OBJECT_FIELDS').join(", ")} from PIF_Application__c where PIF_Contact__c = '#{@app.remote_key}'").entries.last
     @sf_projects = @client.query("select Id, IsDeleted, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, PIF_Application__c, PIF_Project_Name__c, Project_Fit__c from PIF_Project__c where PIF_Application__c = '#{@app_detail['Id']}'")
     @project_detail = []
     @sf_projects.each do |project|
@@ -69,5 +69,25 @@ class HomeController < ApplicationController
     else
       redirect_to_back#, :alert => "Unable to mark as junk."
     end
+  end
+
+  def fetch_flagged_apps
+    @flagged_apps = Application.flagged(10,params[:tag_list])
+    render :json => @flagged_apps.to_json(:methods => :tag_list)
+  end
+
+  def fetch_recent_apps
+    @recent_apps = Application.recent(10,params[:tag_list])
+    render :json => @recent_apps.to_json(:methods => :tag_list)
+  end
+
+  def fetch_recent_reviews
+    @recent_reviews = Review.recent
+    render :json => @recent_reviews.to_json(:methods => [ :reviewer, :applicant, :created_ago ])
+  end
+
+  def fetch_related_apps
+    @related_apps = Application.find_related_tags(params[:tag_list])
+    render :Json => @related_apps
   end
 end
