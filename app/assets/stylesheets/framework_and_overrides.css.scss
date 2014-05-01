@@ -8,7 +8,7 @@
 // make all images responsive by default
 img {
   @extend .img-responsive;
-  margin: 0 auto;
+  margin: 1.0em auto;
   }
 
 // use mixins to create semantic classes
@@ -17,7 +17,7 @@ main {
   background-color: #eee;
   padding-bottom: 80px;
   width: 100%;
-  padding: 40px 80px;
+  padding: 0 80px 40px 80px;
   }
 section {
   @extend .row;
@@ -43,10 +43,24 @@ section {
 
 main {
   background: transparent none;
+  h1 {
+    font-family: 'Quicksand', 'sans-serif';
+    text-align: center;
+  }
+  .banner {
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    width: 100%;
+    background: image-url('dd-logo.jpg') no-repeat center top;
+    height: 123px;
+    display: block;
+    margin-bottom: 2.0em;
+  }
 }
 
 body {
-  background: image-url('ideo-bg1.jpg') no-repeat center center;
+  background: image-url('brutus-bg1.jpg') no-repeat center center;
   background-size: cover;
 }
 
@@ -58,11 +72,21 @@ body {
 
 .footer {
   margin: 50px 0 0 0;
-  border-top: 1px solid #e1e1e1;
+  font-family: 'Lora', 'serif';
+  // border-top: 1px solid #e1e1e1;
+  padding: 1.0em 2.0em;
+  // background: #5f758c;
+  background: #ffffff;
+  // position: static;
+  bottom: 0;
+  width: 100%;
   img {
     padding: 20px;
-    opacity: 0.2;
+    // opacity: 0.2;
     width: 100px;
     float: right;
+  }
+  .tagline {
+    font-size: 2.0em;
   }
 }
