@@ -3,11 +3,7 @@ HireEZ v2 [codename: brutus]
 Doing heavy lifting in the land of government hiring.<br />
 <img src="http://www.kansassampler.org/siteassets/brutis3.jpg" /><br /><br />
 
-
-This application was generated using [RailsApps Composer](http://railsapps.github.io/rails-composer/) with OmniAuth and the [MyUSA strategy](https://github.com/GSA-OCSIT/omniauth-myusa) for authentication.
-
-
-Inspired by the work of [Presidential Innovation Fellows](http://www.whitehouse.gov/innovationfellows).
+This application supports ruby 2.0+ and we recommend using a ruby version manager like [rvm](http://rvm.io/) or rbenv(http://rbenv.org/).
 
 ## How To Get Started
   - Clone repo (`git clone git@github.com:18f/brutus.git`)
