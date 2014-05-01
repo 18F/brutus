@@ -74,17 +74,17 @@ class Application < ActiveRecord::Base
 
 	def self.recent(num=10,tag_list='')
 		unless tag_list.blank?
-			@apps = Application.tagged_with(tag_list, :any => true).where(:junk => false, :status => 'unreviewed').order_by_rand.limit(num).all
+			@apps = Application.tagged_with(tag_list, :any => true).where(:junk => false, :status => 'unreviewed').order("RANDOM()").limit(num)
 		else
-			@apps = Application.where(:junk => false, :status => 'unreviewed').order_by_rand.limit(num).all
+			@apps = Application.where(:junk => false, :status => 'unreviewed').order("RANDOM()").limit(num).all
 		end
 	end
 
 	def self.flagged(num=10,tag_list='')
 		unless tag_list.blank?
-			@apps = Application.tagged_with(tag_list, :any => true).where(:flagged => true, :junk => false).order_by_rand.limit(num).all
+			@apps = Application.tagged_with(tag_list, :any => true).where(:flagged => true, :junk => false).order("RANDOM()").limit(num)
 		else
-			@apps = Application.where(:flagged => true, :junk => false).order_by_rand.limit(num).all
+			@apps = Application.where(:flagged => true, :junk => false).order("RANDOM()").limit(num).all
 		end
 	end
 end
