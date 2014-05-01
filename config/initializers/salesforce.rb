@@ -10,9 +10,10 @@ begin
     obj.each_key do |key|
       desc = client.describe(obj[key])
       fields_arr = desc.fields.map { |f| f.name  }
-      labels_arr = desc.fields.map { |f| f.label }
+      field_metadata_arr = desc.fields.map { |f| { f.name => f.label } }
       Rails.cache.write("#{key}_FIELDS", fields_arr)
-      Rails.cache.write("#{key}_FIELD_LABELS", labels_arr)
+      Rails.cache.write("#{key}_FIELD_METADATA", field_metadata_arr)
+
     end
   end
 

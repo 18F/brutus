@@ -19,8 +19,8 @@ SALESFORCE_CLIENT_ID: id
 SALESFORCE_CLIENT_SECRET: secret
 SALESFORCE_SECURITY_TOKEN: token
 SALESFORCE_HOST: host
-SALESFORCE_CONTACT_OBJECT: obj
-SALESFORCE_APP_OBJECT: obj
+SALESFORCE_CONTACT_OBJECT: Private_Contact__c
+SALESFORCE_APP_OBJECT: PIF_Application__c
 
 SALESFORCE_APP_FIELDS: "Id, OwnerId, IsDeleted, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, LastActivityDate, Additional_Experience__c, Additional_Skills__c, Branch_of_Service__c, City__c, Current_Employer__c, Date_Entered_Active_Duty__c, Email_Address__c, Experience__c, Full_Name__c, Full_Part_Time__c, Link_1__c, Link_2__c, Link_3__c, Motivation__c, Phone_Number__c, Resume__c, Skills__c, US_Citizen__c, Veteran_Status__c, Work_Duration__c, Work_Location__c, Other_Opportunities__c"
 SALESFORCE_CONTACT_FIELDS: "Id, OwnerId, IsDeleted, Name, RecordTypeId, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, LastActivityDate, Billing_City__c, Billing_Country__c, Billing_State_Province__c, Billing_Street__c, Billing_Zip_Postal_Code__c, CHAMP_Household_Goods_Ship_Store__c, Description__c, Fax__c, Old_salesforce_ID__c, Parent_Account__c, Phone__c, Shipping_City__c, Shipping_Country__c, Shipping_State_Province__c, Shipping_Street__c, Shipping_Zip_Postal_Code__c, Type__c, Website__c, X653_1_Home_Sale_Assistance__c, X653_3_Relocation_Technology__c, X653_4_Additional_Services__c, X653_5_Agency_Customization_Services__c, X653_7_Move_Management__c"
