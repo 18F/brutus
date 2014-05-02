@@ -72,4 +72,16 @@ ActiveAdmin.register Application do
     f.actions
   end
 
+
+  controller do
+    def update
+      app = Application.find(params[:id])
+      app.tag_list = params[:application][:tag_list].join(", ")
+      app.save
+
+      super
+    end
+
+  end
+
 end

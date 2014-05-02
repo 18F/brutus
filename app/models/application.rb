@@ -7,7 +7,7 @@ class Application < ActiveRecord::Base
 	validates_uniqueness_of :remote_key, :scope => :remote_source
 	acts_as_taggable_on :tags, :projects, :skills
 
-	before_save :generate_tags
+	after_create :generate_tags
 	before_save :update_status
 
 	BUCKETS = {
