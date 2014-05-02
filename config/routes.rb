@@ -11,6 +11,7 @@ Brutus::Application.routes.draw do
   get '/admin/sync' => 'home#sync'
   get '/admin/app_details/:id' => 'home#app_details'
   get '/admin/mark_junk/:id' => 'home#mark_junk', :as => :mark_junk
+  get '/admin/flag/:id' => 'home#flag_app', :as => :flag_app
   # custom routes for ajax-y dashboard
   get '/admin/fetch_flagged_apps' => 'home#fetch_flagged_apps'
   get '/admin/fetch_recent_apps' => 'home#fetch_recent_apps'

@@ -67,7 +67,19 @@ class HomeController < ApplicationController
       # redirect_to_back#, :alert => 'Marked as junk.'
       redirect_to admin_applications_path, :notice => 'Successfully marked as junk.'
     else
-      redirect_to_back#, :alert => "Unable to mark as junk."
+      flash[:error] = "Unable to mark as junk"
+      redirect_to_back
+    end
+  end
+
+  def flag_app
+    @application = Application.find(params[:id])
+    @application.flagged = true
+    if @application.save
+      redirect_to admin_applications_path, :notice => 'Successfully flagged application.'
+    else
+      flash[:error] = "Unable to flag application."
+      redirect_to_back
     end
   end
 
