@@ -4,12 +4,9 @@ set :application, 'brutus'
 set :repo_url, 'git@github.com:18F/brutus.git'
 set :scm, :git
 
-set :branch, :auto_tagging
-
-
 
 set :default_stage, :qa
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 set :deploy_to, '/var/www/brutus'
 set :current_path, "#{deploy_to}/current"
 set :shared_path, "#{deploy_to}/shared"
@@ -67,7 +64,7 @@ namespace :resque do
     on roles(:resque_worker), in: :parallel do
       within release_path do
         with rails_env: fetch(:rails_env) do
-          execute :resque, 'work -d -p=tmp/pids/resque_worker_1.pid > /dev/null 2>&1 &'
+          execute :resque, 'work -d -p=tmp/pids/resque_worker_1.pid > ./log/resque.log'
         end
       end
     end
