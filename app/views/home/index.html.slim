@@ -9,7 +9,11 @@
 - else
 	.banner
 		/ h1 HireEZ v2
-	= link_to image_tag('sign-in-with-myusa.png'), signin_path
+
+	.panel.sign-in
+		h3 Sign in to get started...
+		.panel_contents
+			= link_to image_tag('sign-in-with-myusa.png'), signin_path
 
 br
 br

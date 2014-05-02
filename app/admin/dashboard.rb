@@ -5,9 +5,21 @@ ActiveAdmin.register_page "Dashboard" do
 
   controller do
     before_filter :set_tags
-
+    before_filter :sync_salesforce
     def set_tags
       @tags = current_user.tag_list
+    end
+
+    def sync_salesforce
+      last_import = Import.last
+      begin
+        if last_import.nil? or last_import.created_at < 10.minutes.ago
+          new_import = Import.create
+          Resque.enqueue(SalesforceSyncJob, new_import.id)
+        end
+      rescue Exception => e
+        logger.error e
+      end
     end
   end
 

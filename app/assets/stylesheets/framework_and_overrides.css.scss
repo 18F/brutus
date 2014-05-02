@@ -8,8 +8,12 @@
 // make all images responsive by default
 img {
   @extend .img-responsive;
-  margin: 1.0em auto;
   }
+
+.panel .sign-in img {
+  margin: 1.0em auto;
+  max-width: 220px;
+}
 
 // use mixins to create semantic classes
 main {
@@ -48,9 +52,9 @@ main {
     text-align: center;
   }
   .banner {
-    // position: absolute;
-    // top: 0;
-    // left: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     background: image-url('dd-logo.jpg') no-repeat center top;
     height: 123px;
@@ -62,6 +66,7 @@ main {
 body {
   background: image-url('brutus-bg1.jpg') no-repeat center center;
   background-size: cover;
+  background-attachment: fixed
 }
 
 .loading {
@@ -70,23 +75,48 @@ body {
   min-height: 150px;
 }
 
-.footer {
-  margin: 50px 0 0 0;
+.outside {
+  padding-top: 140px;
+}
+
+.panel {
+  background: -moz-linear-gradient(top,  rgba(234,234,234,0.84) 0%, rgba(226,226,226,0.84) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(234,234,234,0.84)), color-stop(100%,rgba(226,226,226,0.84))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(234,234,234,0.84) 0%,rgba(226,226,226,0.84) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(234,234,234,0.84) 0%,rgba(226,226,226,0.84) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(234,234,234,0.84) 0%,rgba(226,226,226,0.84) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(234,234,234,0.84) 0%,rgba(226,226,226,0.84) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6eaeaea', endColorstr='#d6e2e2e2',GradientType=0 ); /* IE6-9 */
+
+  .panel_contents {
+    color: #000000;
+    padding: 20px 40px;
+  }
+  .blank_slate_container .blank_slate {
+    color: #545454;
+  }
+  h3 {
+    margin-top: 0;
+    padding: 10px 20px 8px 20px;
+  }
+}
+
+.panel.sign-in {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+body {
   font-family: 'Lora', 'serif';
-  // border-top: 1px solid #e1e1e1;
-  padding: 1.0em 2.0em;
-  // background: #5f758c;
-  background: #ffffff;
-  // position: static;
-  bottom: 0;
-  width: 100%;
-  img {
-    padding: 20px;
-    // opacity: 0.2;
-    width: 100px;
-    float: right;
-  }
-  .tagline {
-    font-size: 2.0em;
-  }
+}
+
+.site_title,
+h1, h2, h3, h4,
+.breadcrumb,
+#header {
+  font-family: 'Quicksand', 'sans-serif';
+}
+
+body {
+  font-family: 'Lora', 'serif';
 }

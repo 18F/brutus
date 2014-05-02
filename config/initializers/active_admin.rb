@@ -5,7 +5,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "HireEZ v2"
+  config.site_title = "HireEZ"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -193,7 +193,6 @@ ActiveAdmin.setup do |config|
   #
   config.namespace :admin do |admin|
     admin.build_menu :utility_navigation do |menu|
-      menu.add label: "Sync from Salesforce", url: "#", html_options: { id: :sync }
       menu.add label: proc { current_user.name },
                url: proc { admin_user_path(current_user) },
                id: 'current_user'
