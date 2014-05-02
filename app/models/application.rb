@@ -68,23 +68,19 @@ class Application < ActiveRecord::Base
 		end
 	end
 
-	def self.tagged_like_user(user_id)
-		Application.where(:junk => false).order_by_rand.limit(num).all
-	end
-
 	def self.recent(num=10,tag_list='')
 		unless tag_list.blank?
-			@apps = Application.tagged_with(tag_list, :any => true).where(:junk => false, :status => 'unreviewed').order("RANDOM()").limit(num)
+			@apps = Application.tagged_with(tag_list, :any => true).where(:junk => false, :status => 'unreviewed').sample(num)
 		else
-			@apps = Application.where(:junk => false, :status => 'unreviewed').order("RANDOM()").limit(num).all
+			@apps = Application.where(:junk => false, :status => 'unreviewed').sample(num)
 		end
 	end
 
 	def self.flagged(num=10,tag_list='')
 		unless tag_list.blank?
-			@apps = Application.tagged_with(tag_list, :any => true).where(:flagged => true, :junk => false).order("RANDOM()").limit(num)
+			@apps = Application.tagged_with(tag_list, :any => true).where(:flagged => true, :junk => false).sample(num)
 		else
-			@apps = Application.where(:flagged => true, :junk => false).order("RANDOM()").limit(num).all
+			@apps = Application.where(:flagged => true, :junk => false).order("RANDOM()").sample(num)
 		end
 	end
 end
