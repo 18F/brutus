@@ -38,9 +38,9 @@ ActiveAdmin.register Application do
   show do |app|
     h5 app.fancy_tag_list
 
-    h3 link_to "Review Application", new_admin_application_review_path(app), :class => 'review_button'
-    h3 link_to "Flag for Follow-up", flag_app_path(app), :class => 'flag_app' unless app.flagged?
-    h3 link_to "Mark as Junk", mark_junk_path(app), :class => 'mark_junk' unless app.junk?
+    h3 link_to "Review", new_admin_application_review_path(app), :class => 'review_button'
+    h3 link_to "Follow-up", flag_app_path(app), :class => 'flag_app' unless app.flagged?
+    h3 link_to "Junk", mark_junk_path(app), :class => 'mark_junk' unless app.junk?
     br
 
     attributes_table do
@@ -50,9 +50,9 @@ ActiveAdmin.register Application do
       row :details
     end
 
-    h3 link_to "Review Application", new_admin_application_review_path(app), :class => 'review_button'
-    h3 link_to "Flag for Follow-up", flag_app_path(app), :class => 'flag_app' unless app.flagged?
-    h3 link_to "Mark as Junk", mark_junk_path(app), :class => 'mark_junk' unless app.junk?
+    h3 link_to "Review", new_admin_application_review_path(app), :class => 'review_button'
+    h3 link_to "Follow-up", flag_app_path(app), :class => 'flag_app' unless app.flagged?
+    h3 link_to "Junk", mark_junk_path(app), :class => 'mark_junk' unless app.junk?
 
   end
 
