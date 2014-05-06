@@ -6,6 +6,7 @@ Brutus::Application.routes.draw do
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/failure' => 'sessions#failure'
+  match '/auth/2fa' => 'sessions#second_factor', :as => :second_factor, :via => [:get, :post]
 
   # custom routes for sf
   get '/admin/sync' => 'home#sync'

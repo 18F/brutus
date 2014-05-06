@@ -1,0 +1,4 @@
+= simple_form_for @second_factor, :url => second_factor_path, :method => 'POST' do |f|
+	= f.input :password
+
+	= f.button :submit, :value => "Submit"

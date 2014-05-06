@@ -41,6 +41,12 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def current_keymaster_user
+      if current_user && [:keymaster].any? {|r| current_user.has_role?(r) }
+        current_user
+      end
+    end
+
     def user_signed_in?
       return true if current_user
     end
@@ -79,6 +85,16 @@ class ApplicationController < ActionController::Base
         end
       else
         redirect_to signin_url, :alert => 'You need to sign in for access to this page.'
+      end
+    end
+
+    def authenticate_keymaster_user!
+      if current_user
+        if !current_keymaster_user
+          redirect_to root_url, :alert => 'You are not authorized to access this page.'
+        end
+      else
+        redirect_to signin_urel, :alert => 'You need to sign in for access to this page.'
       end
     end
 
