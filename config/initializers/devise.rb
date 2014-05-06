@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = '2795fd596519d307592831a6fb3d645fb0897952eb34c1264a9b6fc70deb9dad1aeda50cd17a39931d889fabc68a64737d6037cdbdcdee98fddf7a994d00236e'
+  config.secret_key = '2795fd596519d307592831a6fb3d645fb0897952eb34c1264a9b6fc70deb9dad1aeda50cd17a39931d889fabc68a64737d6037cdbdcdee98fddf7a994d0023e'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -124,7 +124,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  config.remember_for = 1.hour
+  config.remember_for = 10.seconds
 
   # If true, extends the user's remember period when remembered via cookie.
   config.extend_remember_period = false
@@ -145,7 +145,7 @@ Devise.setup do |config|
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
-  config.timeout_in = 30.minutes
+  config.timeout_in = 10.minutes
 
   # If true, expires auth token on session timeout.
   config.expire_auth_token_on_timeout = true

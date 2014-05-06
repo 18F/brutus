@@ -19,6 +19,6 @@ Brutus::Application.routes.draw do
   get '/admin/fetch_recent_reviews' => 'home#fetch_recent_reviews'
   get '/admin/fetch_related_apps/:tag_list' => 'home#fetch_related_apps'
 
-  # devise_for :users, ActiveAdmin::Devise.config
-  devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
+  devise_for :users, ActiveAdmin::Devise.config
+  # devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
 end

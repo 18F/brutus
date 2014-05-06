@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   acts_as_taggable
 
-  # devise :omniauthable, :trackable
+  devise :timeoutable
 
   def has_gov_email?
     return %w{ .gov .mil .fed.us }.any? {|x| self.email.end_with?(x)}

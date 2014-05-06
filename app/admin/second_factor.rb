@@ -24,7 +24,7 @@ ActiveAdmin.register SecondFactor, :as => "Two-Factor" do
       f.input :active
     end
 
-    f.inputs "Mew Master Password" do
+    f.inputs "New Master Password" do
       f.input :password
       f.input :password_confirmation
     end
@@ -44,7 +44,7 @@ ActiveAdmin.register SecondFactor, :as => "Two-Factor" do
             if valid_password = SecondFactor.validate_password(params[:two_factor])
               sf.encrypted_password = Digest::SHA2.hexdigest(valid_password)
             else
-              redirect_to edit_admin_second_factor_path(sf), :notice => "Password does not meet complexity requirements."
+              redirect_to edit_admin_two_factor_path(sf), :notice => "Password does not meet complexity requirements."
               return
             end
             sf.save
