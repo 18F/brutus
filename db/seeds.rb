@@ -83,3 +83,7 @@ cp = CreditingPlan.find_or_create_by(:name => "Default", :active => true)
 		CreditingPlanAssertion.find_or_create_by(:score => 16, :description => "Applicant's resume and portfolio demonstrate mastery and deep understanding across a “full-stack” of current and emergent technologies, and displays leadership either as a manager, formal team lead, or open source project lead", :crediting_plan_category_id => cpc.id)
 		CreditingPlanAssertion.find_or_create_by(:score => 20, :description => "Applicant's ability to perform these tasks at a high level, as well as their team leadership, thought-leadership, writings, teachings, or appearances in these areas affirm that they are widely regarded as an expert in this subject area", :crediting_plan_category_id => cpc.id)
 
+
+
+puts "2FA"
+puts SecondFactor.create(:active => false) unless SecondFactor.active?
