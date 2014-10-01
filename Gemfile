@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
-gem 'rails', '4.0.3'
+ruby '2.1.3'
+gem 'rails', '4.1.5'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -19,7 +19,7 @@ gem 'thin'
 gem 'redis-rails'
 gem 'redis-namespace'
 gem 'resque', '~> 2.0.0.pre.1', :github => 'resque/resque'
-gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'active-resource-pagination'
 gem 'activeresource', require: 'active_resource'
 gem 'httparty'
@@ -41,12 +41,12 @@ group :development do
   gem 'hub', :require=>nil
   gem 'quiet_assets'
   gem 'rails_layout'
-  gem 'capistrano', '~> 3.0.1'
-  gem 'capistrano-rvm', '~> 0.1.0'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails', '~> 1.1.0'
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-rails', '~> 1.1.1'
   # gem 'capistrano-maintenance', github: "capistrano/capistrano-maintenance"
-  gem "capistrano-resque", github: "sshingler/capistrano-resque", require: false
+  gem "capistrano-resque", "~> 0.2.1", require: false
 end
 group :development, :test do
   gem 'factory_girl_rails'
