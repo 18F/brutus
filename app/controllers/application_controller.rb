@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   end
 
-  private
+  # private
     def current_user
       begin
         @current_user ||= User.find(session[:user_id]) if session[:user_id]
