@@ -32,6 +32,7 @@ gem 'newrelic_rpm'
 gem 'twilio-ruby', '~> 3.11'
 gem 'randumb'
 gem 'secure_headers'
+gem 'sqlite3'
 
 group :development do
   gem 'better_errors'
@@ -52,7 +53,7 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
-  gem 'sqlite3'
+  # gem 'sqlite3'
   gem 'pry'
   gem 'pry-nav'
 end
@@ -62,6 +63,6 @@ group :test do
   gem 'email_spec'
 end
 group :production do
-  gem 'pg'
+  # gem 'pg'
   gem 'rails_12factor'
 end
