@@ -4,6 +4,11 @@ set :application, 'brutus'
 set :repo_url, 'git@github.com:18F/brutus.git'
 set :scm, :git
 
+set :rbenv_type, :user # or :system, depends on your rbenv setup
+set :rbenv_ruby, '2.1.3'
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+set :rbenv_roles, :all # default value
 
 set :default_stage, :qa
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -49,37 +54,4 @@ namespace :deploy do
   after :finishing, 'resque:restart_workers'
   # after :finished, 'maintenance:disable'
   # after :finished, 'newrelic:notice_deployment' [TODO]
-end
-
-namespace :resque do
-
-  desc "Restart resque workers"
-  task :restart_workers do
-    invoke 'resque:stop_workers'
-    invoke 'resque:start_workers'
-  end
-
-  desc "Starts resque workers"
-  task :start_workers do
-    on roles(:resque_worker), in: :parallel do
-      within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute :resque, 'work -d -p=tmp/pids/resque_worker_1.pid > ./log/resque.log'
-        end
-      end
-    end
-  end
-
-  desc "Stop Resque Workers"
-  task :stop_workers do
-    on roles(:app) do
-      begin
-        execute "if [ -e #{current_path}/tmp/pids/resque_worker_1.pid ]
-          then for f in `ls #{current_path}/tmp/pids/resque_worker*.pid`
-          do kill -s QUIT `cat $f` && rm $f; done; fi"
-      rescue
-        # do nothing
-      end
-    end
-  end
 end
