@@ -16,7 +16,7 @@ ActiveAdmin.register SecondFactor, :as => "Two-Factor" do
       end
     end
 
-    default_actions
+    actions
   end
 
   form do |f|

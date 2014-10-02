@@ -14,7 +14,7 @@ ActiveAdmin.register Review do
   index do
     column :id
     
-    default_actions
+    actions
     # column "Actions" do |u|
     #   link_to "Review", "/review"
     #   # if can? :read, u

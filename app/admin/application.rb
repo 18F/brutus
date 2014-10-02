@@ -31,7 +31,7 @@ ActiveAdmin.register Application do
     column :status do |app|
       app.status.titleize
     end
-    default_actions
+    actions
   end
 
 
