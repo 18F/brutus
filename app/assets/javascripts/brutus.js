@@ -14,6 +14,7 @@ $(function () {
 					var _field = fields[i];
 					console.log(_field);
 					// console.log(_field[1])
+          console.log(Object.keys(_field)[0])
 					var _value = result.application[Object.keys(_field)[0]]|| '';
 					var _label = _field[Object.keys(_field)[0]];
 					console.log(_value);

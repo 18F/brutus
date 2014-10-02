@@ -23,7 +23,7 @@ set :pty, true
 set :ssh_options, { :forward_agent => true }
 set :resque_environment_task, true
 
-set :linked_files, %w{config/database.yml config/application.yml config/newrelic.yml}
+set :linked_files, %w{config/database.yml config/application.yml config/newrelic.yml db/qa.sqlite3}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/system}
 
 set :keep_releases, 5
@@ -51,7 +51,7 @@ namespace :deploy do
   # before :starting, 'maintenance:enable'
   after :finishing, 'deploy:cleanup'
   after :finishing, 'deploy:migrate'
-  after :finishing, 'resque:restart_workers'
+  # after :finishing, 'resque:restart_workers'
   after :finishing, 'deploy:restart'
   # after :finished, 'maintenance:disable'
   # after :finished, 'newrelic:notice_deployment' [TODO]
