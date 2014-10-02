@@ -28,6 +28,7 @@ Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
 
 Dir['vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
 
+
 # require "capistrano-resque" # keep last line
 
 namespace :resque do
@@ -36,7 +37,7 @@ namespace :resque do
   task :restart_workers do
     invoke 'resque:stop_workers'
     invoke 'resque:start_workers'
-  end
+end
 
   desc "Starts resque workers"
   task :start_workers do

@@ -263,7 +263,9 @@ body {
 }
 
 .panel,
-.paginated_collection_contents {
+.paginated_collection_contents,
+.cpc-box,
+.score-panel {
   background: -moz-linear-gradient(top,  rgba(234,234,234,0.84) 0%, rgba(226,226,226,0.84) 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(234,234,234,0.84)), color-stop(100%,rgba(226,226,226,0.84))); /* Chrome,Safari4+ */
   background: -webkit-linear-gradient(top,  rgba(234,234,234,0.84) 0%,rgba(226,226,226,0.84) 100%); /* Chrome10+,Safari5.1+ */
