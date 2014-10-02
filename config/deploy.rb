@@ -52,6 +52,7 @@ namespace :deploy do
   after :finishing, 'deploy:cleanup'
   after :finishing, 'deploy:migrate'
   after :finishing, 'resque:restart_workers'
+  after :finishing, 'deploy:restart'
   # after :finished, 'maintenance:disable'
   # after :finished, 'newrelic:notice_deployment' [TODO]
 end

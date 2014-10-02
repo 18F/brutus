@@ -9,7 +9,7 @@ Brutus::Application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -41,5 +41,5 @@ Brutus::Application.configure do
   # Send email in development mode.
   config.action_mailer.perform_deliveries = true
 
-  config.action_mailer.default_url_options = { :host => 'http://brutus.qa.gsa.io' }
+  config.action_mailer.default_url_options = { :host => 'http://brutus.18f.us' }
 end
