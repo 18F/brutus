@@ -3,22 +3,20 @@ HireEZ v2 [codename: brutus]
 Doing heavy lifting in the land of government hiring.<br />
 <img src="http://www.kansassampler.org/siteassets/brutis3.jpg" /><br /><br />
 
-This application supports ruby 2.0+ and we recommend using a ruby version manager like [rvm](http://rvm.io/) or rbenv(http://rbenv.org/).
+This application supports Ruby 2.0+ and we recommend using a ruby version manager like [rvm](http://rvm.io/) or rbenv(http://rbenv.org/).
 
 ## How To Get Started
   - Clone repo (`git clone git@github.com:18f/brutus.git`)
   - Install the bundle (`bundle install`)
-  - Create local config files: `cd config`
+  - Create local config files: (in /config)
     - `cp application.example.yml application.yml`
     - `cp database.example.yml database.yml`
     - `cp newrelic.yml.example newrelic.yml`
   - Register your application
-    - with [MyUSA](http://my.usa.gov) (Redirect URI: [host]/auth/myusa/callback)
-    - OR for loal dev register with QA server [MyUSA](http://qa.my.usa.gov) (Redirect URI: http://localhost:3000/auth/myusa/callback)
-  - edit application.yaml
-    - MYUSA_OAUTH_PROVIDER_KEY should be your Auth Client ID from MyUSA
-    - MYUSA_OAUTH_PROVIDER_SECRET should be your Auth Client Secret from MyUSA
-    - if you are using MyUSA QA, then set MYUSA_HOME: https://qa.my.usa.gov
+    - with [MyUSA](http://my.usa.gov) (Redirect URI: [http://localhost:3000]/auth/myusa/callback)
+  - edit application.yml
+    - `MYUSA_OAUTH_PROVIDER_KEY` should be your Auth Client ID from MyUSA
+    - `MYUSA_OAUTH_PROVIDER_SECRET` should be your Auth Client Secret from MyUSA
   - Install [redis](http://redis.io/topics/quickstart) and [memcached](http://cloudbur.st/evan/memcached/files/README.html).  Redis will attempt to run automatically at startup in development.
   - rake db:setup
   - Fire up rails! (`rails s`)
